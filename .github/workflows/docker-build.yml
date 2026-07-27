@@ -1,0 +1,26 @@
+name: Docker Build & Topology Validation
+
+on:
+  push:
+    branches: [ main, qa, dev ]
+  pull_request:
+    branches: [ main, qa ]
+
+jobs:
+  docker-validation:
+    name: 🐳 Docker Compose & Image Build Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🔍 Validate Docker Compose Profiles Syntax
+        run: |
+          docker compose -f docker-compose.dev.yml config
+          docker compose -f docker-compose.qa.yml config
+          docker compose -f docker-compose.prod.yml config
+
+      - name: 🔨 Build Docker Image (Smoke Test)
+        run: |
+          docker build -t trading-signals-ml:test .

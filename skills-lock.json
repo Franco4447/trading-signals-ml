@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "github-actions-templates": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "skillPath": "plugins/cicd-automation/skills/github-actions-templates/SKILL.md",
+      "computedHash": "d57f2a45525180e30d9130aeab1613930c274917c5002899d8c37185594de411"
+    }
+  }
+}

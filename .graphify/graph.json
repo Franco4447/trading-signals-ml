@@ -531,6 +531,61 @@
       ],
       "lineno": 53
     },
+    "scripts/verify_github_setup.py": {
+      "id": "scripts/verify_github_setup.py",
+      "type": "module",
+      "name": "scripts.verify_github_setup",
+      "path": "scripts/verify_github_setup.py",
+      "docstring": "Auditor y Diagnóstico del Ecosistema GitHub (verify_github_setup.py)\n====================================================================\nVerifica el estado de las ramas locales y remotas (main, dev, qa), la\nexistencia de los flujos de trabajo en .github/workflows y la integración\nde la skill github-deploy-monitor.\n\nUso:\n    python scripts/verify_github_setup.py",
+      "lines": 12
+    },
+    "scripts/verify_github_setup.py::run_git_cmd": {
+      "id": "scripts/verify_github_setup.py::run_git_cmd",
+      "type": "function",
+      "name": "run_git_cmd",
+      "path": "scripts/verify_github_setup.py",
+      "docstring": "",
+      "args": [
+        "args"
+      ],
+      "lineno": 22
+    },
+    "scripts/verify_github_setup.py::check_branches": {
+      "id": "scripts/verify_github_setup.py::check_branches",
+      "type": "function",
+      "name": "check_branches",
+      "path": "scripts/verify_github_setup.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 33
+    },
+    "scripts/verify_github_setup.py::check_workflows": {
+      "id": "scripts/verify_github_setup.py::check_workflows",
+      "type": "function",
+      "name": "check_workflows",
+      "path": "scripts/verify_github_setup.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 57
+    },
+    "scripts/verify_github_setup.py::check_skill_integration": {
+      "id": "scripts/verify_github_setup.py::check_skill_integration",
+      "type": "function",
+      "name": "check_skill_integration",
+      "path": "scripts/verify_github_setup.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 77
+    },
+    "scripts/verify_github_setup.py::main": {
+      "id": "scripts/verify_github_setup.py::main",
+      "type": "function",
+      "name": "main",
+      "path": "scripts/verify_github_setup.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 91
+    },
     "src/__init__.py": {
       "id": "src/__init__.py",
       "type": "module",
@@ -2489,6 +2544,31 @@
     {
       "source": "scripts/validate_env.py",
       "target": "scripts/validate_env.py::validate_environment",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/verify_github_setup.py",
+      "target": "scripts/verify_github_setup.py::run_git_cmd",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/verify_github_setup.py",
+      "target": "scripts/verify_github_setup.py::check_branches",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/verify_github_setup.py",
+      "target": "scripts/verify_github_setup.py::check_workflows",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/verify_github_setup.py",
+      "target": "scripts/verify_github_setup.py::check_skill_integration",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/verify_github_setup.py",
+      "target": "scripts/verify_github_setup.py::main",
       "relation": "defines"
     },
     {

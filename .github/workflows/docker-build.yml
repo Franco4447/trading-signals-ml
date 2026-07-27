@@ -17,6 +17,7 @@ jobs:
 
       - name: 🔍 Validate Docker Compose Profiles Syntax
         run: |
+          touch .env.dev .env.qa .env.prod
           docker compose -f docker-compose.dev.yml config
           docker compose -f docker-compose.qa.yml config
           docker compose -f docker-compose.prod.yml config

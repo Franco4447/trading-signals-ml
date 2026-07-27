@@ -74,3 +74,10 @@ Tal como establecimos en las reglas operativas, **queda estrictamente prohibido 
 
 ### Autorización Final:
 Solo tras validar estos números empíricos en Telegram, autorizarás en GitHub la fusión de `qa` hacia `main` e iniciaremos el despliegue en el **VPS 2 (Producción Live)**.
+
+---
+
+## 🔐 4. Registro de Verificación Web y Protección de Ramas
+
+* **Configuración Web Completada (2026-07-27)**: Las reglas de protección para las ramas `main` y `qa`, junto con los entornos nativos de GitHub (`development`, `qa`, `production` con *Required Reviewers* activos), han sido formalmente configurados en GitHub.com por el dueño del repositorio.
+* **Estado del Sistema**: Preparado e instrumentado con la skill `github-deploy-monitor` para auditar cualquier futuro Pull Request y despliegue a VPS.

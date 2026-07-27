@@ -10,10 +10,14 @@ Simulates 1,000 synthetic crypto candles across extreme volatility regimes
 - Financial Metrics evaluation (Sharpe, Sortino, Max Drawdown, Profit Factor)
 """
 import sys
+from pathlib import Path
 try:
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 except Exception:
     pass
+
+root_dir = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(root_dir))
 
 import time
 import numpy as np

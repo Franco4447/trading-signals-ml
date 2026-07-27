@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  trading-signals-api-qa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trading-signals-ml-api-qa
+    ports:
+      - "8001:8000"
+    env_file:
+      - .env.qa
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./data/qa:/app/data
+      - ./models/qa:/app/models
+    restart: always
+
+  trading-signals-worker-qa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trading-signals-ml-worker-qa
+    command: python -m scripts.run_paper_trading --symbol BTC/USDT --iterations 0
+    env_file:
+      - .env.qa
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./data/qa:/app/data
+      - ./models/qa:/app/models
+    restart: always
+    depends_on:
+      - trading-signals-api-qa
+
+  trading-signals-dashboard-qa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: trading-signals-ml-dash-qa
+    command: streamlit run src/dashboard/app.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8502:8501"
+    env_file:
+      - .env.qa
+    environment:
+      - PYTHONUNBUFFERED=1
+      - API_URL=http://trading-signals-api-qa:8000
+    volumes:
+      - ./data/qa:/app/data
+      - ./models/qa:/app/models
+    restart: always
+    depends_on:
+      - trading-signals-api-qa

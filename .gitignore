@@ -1,3 +1,7 @@
+# Security & Environment Credentials
+.env*
+!.env.example
+
 # Byte-compiled / Python
 __pycache__/
 *.py[cod]

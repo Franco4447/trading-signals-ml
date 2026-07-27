@@ -1,0 +1,3460 @@
+{
+  "version": "1.0",
+  "nodes": {
+    "graphify/extractor.py": {
+      "id": "graphify/extractor.py",
+      "type": "module",
+      "name": "graphify.extractor",
+      "path": "graphify/extractor.py",
+      "docstring": "AST Parser and repository scanner for Graphify.\nExtracts module structure, classes, functions, docstrings, and import relationships\nwithout importing or running arbitrary code.",
+      "lines": 10
+    },
+    "graphify/extractor.py::ASTExtractor": {
+      "id": "graphify/extractor.py::ASTExtractor",
+      "type": "class",
+      "name": "ASTExtractor",
+      "path": "graphify/extractor.py",
+      "docstring": "AST Visitor that extracts structural metadata and dependencies from a single Python file.",
+      "bases": [
+        "NodeVisitor"
+      ],
+      "lineno": 20
+    },
+    "graphify/extractor.py::ASTExtractor.__init__": {
+      "id": "graphify/extractor.py::ASTExtractor.__init__",
+      "type": "function",
+      "name": "ASTExtractor.__init__",
+      "path": "graphify/extractor.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "rel_path",
+        "module_name",
+        "graph"
+      ],
+      "lineno": 24
+    },
+    "graphify/extractor.py::ASTExtractor.visit_Module": {
+      "id": "graphify/extractor.py::ASTExtractor.visit_Module",
+      "type": "function",
+      "name": "ASTExtractor.visit_Module",
+      "path": "graphify/extractor.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "node"
+      ],
+      "lineno": 30
+    },
+    "graphify/extractor.py::ASTExtractor.visit_ClassDef": {
+      "id": "graphify/extractor.py::ASTExtractor.visit_ClassDef",
+      "type": "function",
+      "name": "ASTExtractor.visit_ClassDef",
+      "path": "graphify/extractor.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "node"
+      ],
+      "lineno": 42
+    },
+    "graphify/extractor.py::ASTExtractor.visit_FunctionDef": {
+      "id": "graphify/extractor.py::ASTExtractor.visit_FunctionDef",
+      "type": "function",
+      "name": "ASTExtractor.visit_FunctionDef",
+      "path": "graphify/extractor.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "node"
+      ],
+      "lineno": 68
+    },
+    "graphify/extractor.py::ASTExtractor.visit_AsyncFunctionDef": {
+      "id": "graphify/extractor.py::ASTExtractor.visit_AsyncFunctionDef",
+      "type": "function",
+      "name": "ASTExtractor.visit_AsyncFunctionDef",
+      "path": "graphify/extractor.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "node"
+      ],
+      "lineno": 71
+    },
+    "graphify/extractor.py::ASTExtractor._process_function": {
+      "id": "graphify/extractor.py::ASTExtractor._process_function",
+      "type": "function",
+      "name": "ASTExtractor._process_function",
+      "path": "graphify/extractor.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "node"
+      ],
+      "lineno": 74
+    },
+    "graphify/extractor.py::ASTExtractor.visit_Import": {
+      "id": "graphify/extractor.py::ASTExtractor.visit_Import",
+      "type": "function",
+      "name": "ASTExtractor.visit_Import",
+      "path": "graphify/extractor.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "node"
+      ],
+      "lineno": 108
+    },
+    "graphify/extractor.py::ASTExtractor.visit_ImportFrom": {
+      "id": "graphify/extractor.py::ASTExtractor.visit_ImportFrom",
+      "type": "function",
+      "name": "ASTExtractor.visit_ImportFrom",
+      "path": "graphify/extractor.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "node"
+      ],
+      "lineno": 114
+    },
+    "graphify/extractor.py::_module_to_rel_path": {
+      "id": "graphify/extractor.py::_module_to_rel_path",
+      "type": "function",
+      "name": "_module_to_rel_path",
+      "path": "graphify/extractor.py",
+      "docstring": "Converts a Python module dot-notation name to a relative file path in the repository.\nExample: 'src.features.technical_indicators' -> 'src/features/technical_indicators.py'",
+      "args": [
+        "module_name"
+      ],
+      "lineno": 126
+    },
+    "graphify/extractor.py::extract_repository_graph": {
+      "id": "graphify/extractor.py::extract_repository_graph",
+      "type": "function",
+      "name": "extract_repository_graph",
+      "path": "graphify/extractor.py",
+      "docstring": "Scans a Python repository directory, extracts AST metadata from all valid .py files,\nand returns a consolidated KnowledgeGraph.",
+      "args": [
+        "root_dir"
+      ],
+      "lineno": 135
+    },
+    "graphify/graph.py": {
+      "id": "graphify/graph.py",
+      "type": "module",
+      "name": "graphify.graph",
+      "path": "graphify/graph.py",
+      "docstring": "Knowledge Graph data structure and relational query engine for Graphify.\nStores AST nodes (modules, classes, functions) and directed edges (imports, defines, inherits),\nwith persistence to JSON and query capabilities.",
+      "lines": 6
+    },
+    "graphify/graph.py::KnowledgeGraph": {
+      "id": "graphify/graph.py::KnowledgeGraph",
+      "type": "class",
+      "name": "KnowledgeGraph",
+      "path": "graphify/graph.py",
+      "docstring": "In-memory graph database and JSON serializer for code repository structure.",
+      "bases": [],
+      "lineno": 12
+    },
+    "graphify/graph.py::KnowledgeGraph.__init__": {
+      "id": "graphify/graph.py::KnowledgeGraph.__init__",
+      "type": "function",
+      "name": "KnowledgeGraph.__init__",
+      "path": "graphify/graph.py",
+      "docstring": "",
+      "args": [
+        "self"
+      ],
+      "lineno": 16
+    },
+    "graphify/graph.py::KnowledgeGraph.add_node": {
+      "id": "graphify/graph.py::KnowledgeGraph.add_node",
+      "type": "function",
+      "name": "KnowledgeGraph.add_node",
+      "path": "graphify/graph.py",
+      "docstring": "Adds or updates a node in the graph.",
+      "args": [
+        "self",
+        "node_id",
+        "node_type",
+        "name",
+        "path",
+        "docstring"
+      ],
+      "lineno": 22
+    },
+    "graphify/graph.py::KnowledgeGraph.add_edge": {
+      "id": "graphify/graph.py::KnowledgeGraph.add_edge",
+      "type": "function",
+      "name": "KnowledgeGraph.add_edge",
+      "path": "graphify/graph.py",
+      "docstring": "Adds a directed edge between two nodes.",
+      "args": [
+        "self",
+        "source",
+        "target",
+        "relation"
+      ],
+      "lineno": 39
+    },
+    "graphify/graph.py::KnowledgeGraph.save": {
+      "id": "graphify/graph.py::KnowledgeGraph.save",
+      "type": "function",
+      "name": "KnowledgeGraph.save",
+      "path": "graphify/graph.py",
+      "docstring": "Persists the graph to a JSON file.",
+      "args": [
+        "self",
+        "filepath"
+      ],
+      "lineno": 54
+    },
+    "graphify/graph.py::KnowledgeGraph.load": {
+      "id": "graphify/graph.py::KnowledgeGraph.load",
+      "type": "function",
+      "name": "KnowledgeGraph.load",
+      "path": "graphify/graph.py",
+      "docstring": "Loads a graph from a JSON file.",
+      "args": [
+        "cls",
+        "filepath"
+      ],
+      "lineno": 69
+    },
+    "graphify/graph.py::KnowledgeGraph.query": {
+      "id": "graphify/graph.py::KnowledgeGraph.query",
+      "type": "function",
+      "name": "KnowledgeGraph.query",
+      "path": "graphify/graph.py",
+      "docstring": "Searches nodes by matching query terms against node ID, name, path, or docstring.",
+      "args": [
+        "self",
+        "query_string"
+      ],
+      "lineno": 91
+    },
+    "graphify/graph.py::KnowledgeGraph.get_dependencies": {
+      "id": "graphify/graph.py::KnowledgeGraph.get_dependencies",
+      "type": "function",
+      "name": "KnowledgeGraph.get_dependencies",
+      "path": "graphify/graph.py",
+      "docstring": "Returns a list of module IDs imported by the given module.",
+      "args": [
+        "self",
+        "module_query"
+      ],
+      "lineno": 108
+    },
+    "graphify/graph.py::KnowledgeGraph.get_dependents": {
+      "id": "graphify/graph.py::KnowledgeGraph.get_dependents",
+      "type": "function",
+      "name": "KnowledgeGraph.get_dependents",
+      "path": "graphify/graph.py",
+      "docstring": "Returns a list of module IDs that import the given module.",
+      "args": [
+        "self",
+        "module_query"
+      ],
+      "lineno": 122
+    },
+    "graphify/graph.py::KnowledgeGraph._resolve_module_id": {
+      "id": "graphify/graph.py::KnowledgeGraph._resolve_module_id",
+      "type": "function",
+      "name": "KnowledgeGraph._resolve_module_id",
+      "path": "graphify/graph.py",
+      "docstring": "Resolves a module name, path, or ID to a valid node ID in the graph.",
+      "args": [
+        "self",
+        "query"
+      ],
+      "lineno": 136
+    },
+    "graphify/graph.py::KnowledgeGraph.get_stats": {
+      "id": "graphify/graph.py::KnowledgeGraph.get_stats",
+      "type": "function",
+      "name": "KnowledgeGraph.get_stats",
+      "path": "graphify/graph.py",
+      "docstring": "Returns statistics of the indexed knowledge graph.",
+      "args": [
+        "self"
+      ],
+      "lineno": 150
+    },
+    "graphify/server.py": {
+      "id": "graphify/server.py",
+      "type": "module",
+      "name": "graphify.server",
+      "path": "graphify/server.py",
+      "docstring": "MCP (Model Context Protocol) Server for Graphify.\nExposes AST code indexer, query search, and dependency tools to AI agents\nusing FastMCP (if available) or lightweight stdio JSON-RPC fallback.",
+      "lines": 13
+    },
+    "graphify/server.py::_tool_extract": {
+      "id": "graphify/server.py::_tool_extract",
+      "type": "function",
+      "name": "_tool_extract",
+      "path": "graphify/server.py",
+      "docstring": "Regenera el grafo cognitivo del repositorio analizando los archivos Python por AST.",
+      "args": [
+        "directory"
+      ],
+      "lineno": 18
+    },
+    "graphify/server.py::_tool_query": {
+      "id": "graphify/server.py::_tool_query",
+      "type": "function",
+      "name": "_tool_query",
+      "path": "graphify/server.py",
+      "docstring": "Busca en el grafo del conocimiento nodos coincidentes en nombre, ruta o docstring.",
+      "args": [
+        "query_string"
+      ],
+      "lineno": 26
+    },
+    "graphify/server.py::_tool_dependencies": {
+      "id": "graphify/server.py::_tool_dependencies",
+      "type": "function",
+      "name": "_tool_dependencies",
+      "path": "graphify/server.py",
+      "docstring": "Lista qué módulos y librerías son importados (dependencias directas) por un archivo o módulo.",
+      "args": [
+        "module_name"
+      ],
+      "lineno": 32
+    },
+    "graphify/server.py::_tool_dependents": {
+      "id": "graphify/server.py::_tool_dependents",
+      "type": "function",
+      "name": "_tool_dependents",
+      "path": "graphify/server.py",
+      "docstring": "Lista qué archivos y módulos del proyecto dependen de un módulo dado (dependientes inversos).",
+      "args": [
+        "module_name"
+      ],
+      "lineno": 38
+    },
+    "graphify/server.py::graphify_extract": {
+      "id": "graphify/server.py::graphify_extract",
+      "type": "function",
+      "name": "graphify_extract",
+      "path": "graphify/server.py",
+      "docstring": "Regenerate the repository AST knowledge graph.",
+      "args": [
+        "directory"
+      ],
+      "lineno": 50
+    },
+    "graphify/server.py::graphify_query": {
+      "id": "graphify/server.py::graphify_query",
+      "type": "function",
+      "name": "graphify_query",
+      "path": "graphify/server.py",
+      "docstring": "Search the repository graph by term or keyword.",
+      "args": [
+        "query_string"
+      ],
+      "lineno": 55
+    },
+    "graphify/server.py::graphify_dependencies": {
+      "id": "graphify/server.py::graphify_dependencies",
+      "type": "function",
+      "name": "graphify_dependencies",
+      "path": "graphify/server.py",
+      "docstring": "List internal modules imported by the specified module.",
+      "args": [
+        "module_name"
+      ],
+      "lineno": 60
+    },
+    "graphify/server.py::graphify_dependents": {
+      "id": "graphify/server.py::graphify_dependents",
+      "type": "function",
+      "name": "graphify_dependents",
+      "path": "graphify/server.py",
+      "docstring": "List internal modules that import the specified module.",
+      "args": [
+        "module_name"
+      ],
+      "lineno": 65
+    },
+    "graphify/server.py::run_server": {
+      "id": "graphify/server.py::run_server",
+      "type": "function",
+      "name": "run_server",
+      "path": "graphify/server.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 74
+    },
+    "graphify/__init__.py": {
+      "id": "graphify/__init__.py",
+      "type": "module",
+      "name": "graphify",
+      "path": "graphify/__init__.py",
+      "docstring": "Graphify Knowledge Graph & MCP Server Engine.\nIndexes Python codebase via AST, constructs relational knowledge graph, and serves AI agents.",
+      "lines": 2
+    },
+    "graphify/__main__.py": {
+      "id": "graphify/__main__.py",
+      "type": "module",
+      "name": "graphify.__main__",
+      "path": "graphify/__main__.py",
+      "docstring": "Command-line interface (CLI) entry point for Graphify.\nSupports 'extract', 'query', and 'serve' commands.",
+      "lines": 9
+    },
+    "graphify/__main__.py::main": {
+      "id": "graphify/__main__.py::main",
+      "type": "function",
+      "name": "main",
+      "path": "graphify/__main__.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 16
+    },
+    "scripts/run_paper_trading.py": {
+      "id": "scripts/run_paper_trading.py",
+      "type": "module",
+      "name": "scripts.run_paper_trading",
+      "path": "scripts/run_paper_trading.py",
+      "docstring": "Live Paper Trading Runner Script.\nExecutes continuous real-time Paper Trading loop with Multi-Timeframe (MTF) features,\nATR Risk Budgeting leverage, Pyramiding position scaling, and Telegram push alerts.",
+      "lines": 21
+    },
+    "scripts/run_paper_trading.py::handle_shutdown": {
+      "id": "scripts/run_paper_trading.py::handle_shutdown",
+      "type": "function",
+      "name": "handle_shutdown",
+      "path": "scripts/run_paper_trading.py",
+      "docstring": "",
+      "args": [
+        "signum",
+        "frame"
+      ],
+      "lineno": 27
+    },
+    "scripts/run_paper_trading.py::run_loop": {
+      "id": "scripts/run_paper_trading.py::run_loop",
+      "type": "function",
+      "name": "run_loop",
+      "path": "scripts/run_paper_trading.py",
+      "docstring": "",
+      "args": [
+        "symbol",
+        "interval_sec",
+        "dry_run_iterations"
+      ],
+      "lineno": 37
+    },
+    "scripts/run_preprod_stress_test.py": {
+      "id": "scripts/run_preprod_stress_test.py",
+      "type": "module",
+      "name": "scripts.run_preprod_stress_test",
+      "path": "scripts/run_preprod_stress_test.py",
+      "docstring": "Quantitative Pre-Production Stress-Test & Backtest Gatekeeper.\n\nSimulates 1,000 synthetic crypto candles across extreme volatility regimes\n(bull run, flash crash shock, high-vol consolidation) applying:\n- Calibrated continuous signals in [-1.0, +1.0]\n- Maker Fee 0.020% & Slippage 0.010%\n- Fractional Kelly position sizing capped at HARD_MAX_LEVERAGE\n- Bracket OCO Take-Profit and Stop-Loss orders\n- Financial Metrics evaluation (Sharpe, Sortino, Max Drawdown, Profit Factor)",
+      "lines": 11
+    },
+    "scripts/run_preprod_stress_test.py::generate_stress_scenario": {
+      "id": "scripts/run_preprod_stress_test.py::generate_stress_scenario",
+      "type": "function",
+      "name": "generate_stress_scenario",
+      "path": "scripts/run_preprod_stress_test.py",
+      "docstring": "Generates realistic synthetic 4-hour OHLCV candles with regime shifts:\n0-300: Bullish trend with moderate volatility\n300-500: Flash crash / severe drawdown shock (-25% drop)\n500-1000: High volatility sideways mean-reversion regime",
+      "args": [
+        "n_candles",
+        "seed"
+      ],
+      "lineno": 32
+    },
+    "scripts/run_preprod_stress_test.py::run_gatekeeper_stress_test": {
+      "id": "scripts/run_preprod_stress_test.py::run_gatekeeper_stress_test",
+      "type": "function",
+      "name": "run_gatekeeper_stress_test",
+      "path": "scripts/run_preprod_stress_test.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 96
+    },
+    "scripts/update_knowledge_graph.py": {
+      "id": "scripts/update_knowledge_graph.py",
+      "type": "module",
+      "name": "scripts.update_knowledge_graph",
+      "path": "scripts/update_knowledge_graph.py",
+      "docstring": "MLOps Automation Script: Update Graphify Knowledge Graph.\nExtracts AST structure of repository and refreshes .graphify/graph.json.",
+      "lines": 8
+    },
+    "scripts/update_knowledge_graph.py::update_graph": {
+      "id": "scripts/update_knowledge_graph.py::update_graph",
+      "type": "function",
+      "name": "update_graph",
+      "path": "scripts/update_knowledge_graph.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 15
+    },
+    "scripts/validate_env.py": {
+      "id": "scripts/validate_env.py",
+      "type": "module",
+      "name": "scripts.validate_env",
+      "path": "scripts/validate_env.py",
+      "docstring": "MLOps Environment Validator Script.\nAudits required environment variables for Dev, QA, and Production profiles\nwithout printing sensitive API secrets to console logs.",
+      "lines": 12
+    },
+    "scripts/validate_env.py::_mask_secret": {
+      "id": "scripts/validate_env.py::_mask_secret",
+      "type": "function",
+      "name": "_mask_secret",
+      "path": "scripts/validate_env.py",
+      "docstring": "",
+      "args": [
+        "val"
+      ],
+      "lineno": 30
+    },
+    "scripts/validate_env.py::parse_env_file": {
+      "id": "scripts/validate_env.py::parse_env_file",
+      "type": "function",
+      "name": "parse_env_file",
+      "path": "scripts/validate_env.py",
+      "docstring": "",
+      "args": [
+        "filepath"
+      ],
+      "lineno": 36
+    },
+    "scripts/validate_env.py::validate_environment": {
+      "id": "scripts/validate_env.py::validate_environment",
+      "type": "function",
+      "name": "validate_environment",
+      "path": "scripts/validate_env.py",
+      "docstring": "",
+      "args": [
+        "env_path"
+      ],
+      "lineno": 53
+    },
+    "src/__init__.py": {
+      "id": "src/__init__.py",
+      "type": "module",
+      "name": "src",
+      "path": "src/__init__.py",
+      "docstring": "Trading Signals ML Package.",
+      "lines": 2
+    },
+    "src/api/server.py": {
+      "id": "src/api/server.py",
+      "type": "module",
+      "name": "src.api.server",
+      "path": "src/api/server.py",
+      "docstring": "FastAPI Server for Real-Time Trading Signals Inference (REST & WebSocket).\nProvides /health, /predict REST endpoints and /ws/signals WebSocket streaming.\nIncludes Hard Circuit Breakers, Leverage Cap Enforcements & Telegram Push Alerts.",
+      "lines": 32
+    },
+    "src/api/server.py::CandleInput": {
+      "id": "src/api/server.py::CandleInput",
+      "type": "class",
+      "name": "CandleInput",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "bases": [
+        "BaseModel"
+      ],
+      "lineno": 33
+    },
+    "src/api/server.py::PredictionPayload": {
+      "id": "src/api/server.py::PredictionPayload",
+      "type": "class",
+      "name": "PredictionPayload",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "bases": [
+        "BaseModel"
+      ],
+      "lineno": 42
+    },
+    "src/api/server.py::SignalResponse": {
+      "id": "src/api/server.py::SignalResponse",
+      "type": "class",
+      "name": "SignalResponse",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "bases": [
+        "BaseModel"
+      ],
+      "lineno": 48
+    },
+    "src/api/server.py::ReloadModelPayload": {
+      "id": "src/api/server.py::ReloadModelPayload",
+      "type": "class",
+      "name": "ReloadModelPayload",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "bases": [
+        "BaseModel"
+      ],
+      "lineno": 58
+    },
+    "src/api/server.py::health_check": {
+      "id": "src/api/server.py::health_check",
+      "type": "function",
+      "name": "health_check",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 63
+    },
+    "src/api/server.py::get_performance_metrics": {
+      "id": "src/api/server.py::get_performance_metrics",
+      "type": "function",
+      "name": "get_performance_metrics",
+      "path": "src/api/server.py",
+      "docstring": "Returns active quantitative performance metrics for the Streamlit dashboard.",
+      "args": [],
+      "lineno": 68
+    },
+    "src/api/server.py::get_dashboard_stats": {
+      "id": "src/api/server.py::get_dashboard_stats",
+      "type": "function",
+      "name": "get_dashboard_stats",
+      "path": "src/api/server.py",
+      "docstring": "Returns paper trading equity curve history and recent transaction log.",
+      "args": [],
+      "lineno": 84
+    },
+    "src/api/server.py::get_drift_status": {
+      "id": "src/api/server.py::get_drift_status",
+      "type": "function",
+      "name": "get_drift_status",
+      "path": "src/api/server.py",
+      "docstring": "Returns Concept Drift evaluation status.",
+      "args": [],
+      "lineno": 109
+    },
+    "src/api/server.py::reload_model_in_memory": {
+      "id": "src/api/server.py::reload_model_in_memory",
+      "type": "function",
+      "name": "reload_model_in_memory",
+      "path": "src/api/server.py",
+      "docstring": "Zero-Downtime Hot-Reloading endpoint: Reloads trained .joblib model in API memory without restart.",
+      "args": [
+        "payload"
+      ],
+      "lineno": 122
+    },
+    "src/api/server.py::predict_signal": {
+      "id": "src/api/server.py::predict_signal",
+      "type": "function",
+      "name": "predict_signal",
+      "path": "src/api/server.py",
+      "docstring": "Computes features, evaluates signal score in [-1.0, +1.0] and calculates TP/SL levels.\nEnforces Hard Circuit Breakers, Hard Leverage Cap and triggers Telegram Alerts for strong signals.",
+      "args": [
+        "payload"
+      ],
+      "lineno": 142
+    },
+    "src/api/server.py::ConnectionManager": {
+      "id": "src/api/server.py::ConnectionManager",
+      "type": "class",
+      "name": "ConnectionManager",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "bases": [],
+      "lineno": 248
+    },
+    "src/api/server.py::ConnectionManager.__init__": {
+      "id": "src/api/server.py::ConnectionManager.__init__",
+      "type": "function",
+      "name": "ConnectionManager.__init__",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "args": [
+        "self"
+      ],
+      "lineno": 249
+    },
+    "src/api/server.py::ConnectionManager.connect": {
+      "id": "src/api/server.py::ConnectionManager.connect",
+      "type": "function",
+      "name": "ConnectionManager.connect",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "websocket"
+      ],
+      "lineno": 252
+    },
+    "src/api/server.py::ConnectionManager.disconnect": {
+      "id": "src/api/server.py::ConnectionManager.disconnect",
+      "type": "function",
+      "name": "ConnectionManager.disconnect",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "websocket"
+      ],
+      "lineno": 256
+    },
+    "src/api/server.py::ConnectionManager.broadcast": {
+      "id": "src/api/server.py::ConnectionManager.broadcast",
+      "type": "function",
+      "name": "ConnectionManager.broadcast",
+      "path": "src/api/server.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "message"
+      ],
+      "lineno": 259
+    },
+    "src/api/server.py::websocket_signals_endpoint": {
+      "id": "src/api/server.py::websocket_signals_endpoint",
+      "type": "function",
+      "name": "websocket_signals_endpoint",
+      "path": "src/api/server.py",
+      "docstring": "Streaming WebSocket endpoint broadcasting periodic signal updates with Hard Circuit Breakers.",
+      "args": [
+        "websocket"
+      ],
+      "lineno": 268
+    },
+    "src/backtest/engine.py": {
+      "id": "src/backtest/engine.py",
+      "type": "module",
+      "name": "src.backtest.engine",
+      "path": "src/backtest/engine.py",
+      "docstring": "Vectorized & Event-Driven Backtesting Engine.\nSimulates explicit Leverage (Nx), Margin Maintenance, Liquidation Prices (P_liq),\nTaker/Maker fees on notional value, and slippage.",
+      "lines": 7
+    },
+    "src/backtest/engine.py::run_leverage_backtest": {
+      "id": "src/backtest/engine.py::run_leverage_backtest",
+      "type": "function",
+      "name": "run_leverage_backtest",
+      "path": "src/backtest/engine.py",
+      "docstring": "Executes vectorized backtest from continuous signal [-1.0, +1.0] with explicit Leverage and Liquidation simulation.\n\nParameters:\n    df: Polars DataFrame containing prices.\n    leverage: Max leverage multiplier (e.g., 3.0x, 5.0x, 10.0x).\n    signal_threshold: Minimum absolute signal magnitude to open position.\n    taker_fee: Fee charged on NOTIONAL trade volume.\n    slippage: Execution price slippage penalty.\n    maintenance_margin_rate: Exchange Maintenance Margin Rate (MMR).\n    initial_capital: Starting portfolio balance in USDT.",
+      "args": [
+        "df",
+        "signal_col",
+        "price_col",
+        "high_col",
+        "low_col",
+        "leverage",
+        "signal_threshold",
+        "taker_fee",
+        "slippage",
+        "maintenance_margin_rate",
+        "initial_capital"
+      ],
+      "lineno": 22
+    },
+    "src/backtest/metrics.py": {
+      "id": "src/backtest/metrics.py",
+      "type": "module",
+      "name": "src.backtest.metrics",
+      "path": "src/backtest/metrics.py",
+      "docstring": "Quantitative Financial Metrics Module for Backtesting.\nIncludes Sharpe Ratio, Sortino Ratio, Max Drawdown, Calmar Ratio, and Profit Factor.",
+      "lines": 7
+    },
+    "src/backtest/metrics.py::calculate_sharpe_ratio": {
+      "id": "src/backtest/metrics.py::calculate_sharpe_ratio",
+      "type": "function",
+      "name": "calculate_sharpe_ratio",
+      "path": "src/backtest/metrics.py",
+      "docstring": "Calculates Annualized Sharpe Ratio.",
+      "args": [
+        "returns",
+        "risk_free_rate",
+        "annualization_factor"
+      ],
+      "lineno": 8
+    },
+    "src/backtest/metrics.py::calculate_sortino_ratio": {
+      "id": "src/backtest/metrics.py::calculate_sortino_ratio",
+      "type": "function",
+      "name": "calculate_sortino_ratio",
+      "path": "src/backtest/metrics.py",
+      "docstring": "Calculates Annualized Sortino Ratio (downside risk only).",
+      "args": [
+        "returns",
+        "risk_free_rate",
+        "annualization_factor"
+      ],
+      "lineno": 22
+    },
+    "src/backtest/metrics.py::calculate_max_drawdown": {
+      "id": "src/backtest/metrics.py::calculate_max_drawdown",
+      "type": "function",
+      "name": "calculate_max_drawdown",
+      "path": "src/backtest/metrics.py",
+      "docstring": "Calculates Maximum Peak-to-Trough Drawdown.",
+      "args": [
+        "cum_returns"
+      ],
+      "lineno": 40
+    },
+    "src/backtest/metrics.py::calculate_profit_factor": {
+      "id": "src/backtest/metrics.py::calculate_profit_factor",
+      "type": "function",
+      "name": "calculate_profit_factor",
+      "path": "src/backtest/metrics.py",
+      "docstring": "Calculates Profit Factor (Gross Profits / Gross Losses).",
+      "args": [
+        "returns"
+      ],
+      "lineno": 51
+    },
+    "src/backtest/metrics.py::calculate_calmar_ratio": {
+      "id": "src/backtest/metrics.py::calculate_calmar_ratio",
+      "type": "function",
+      "name": "calculate_calmar_ratio",
+      "path": "src/backtest/metrics.py",
+      "docstring": "Calculates Calmar Ratio (Annualized Return / Max Drawdown).",
+      "args": [
+        "cum_returns",
+        "annualization_factor"
+      ],
+      "lineno": 62
+    },
+    "src/backtest/__init__.py": {
+      "id": "src/backtest/__init__.py",
+      "type": "module",
+      "name": "src.backtest",
+      "path": "src/backtest/__init__.py",
+      "docstring": "Backtest package.",
+      "lines": 5
+    },
+    "src/dashboard/app.py": {
+      "id": "src/dashboard/app.py",
+      "type": "module",
+      "name": "src.dashboard.app",
+      "path": "src/dashboard/app.py",
+      "docstring": "Streamlit Visual Monitoring Dashboard for Trading Signals ML.\nVisualizes real-time continuous signal [-1.0, +1.0], equity curve PnL,\n1d macro trend status, and concept drift metrics.",
+      "lines": 30
+    },
+    "src/data/cleaning.py": {
+      "id": "src/data/cleaning.py",
+      "type": "module",
+      "name": "src.data.cleaning",
+      "path": "src/data/cleaning.py",
+      "docstring": "Data cleaning, validation, and Information Bars sampling module.",
+      "lines": 7
+    },
+    "src/data/cleaning.py::clean_ohlcv_data": {
+      "id": "src/data/cleaning.py::clean_ohlcv_data",
+      "type": "function",
+      "name": "clean_ohlcv_data",
+      "path": "src/data/cleaning.py",
+      "docstring": "Cleans OHLCV DataFrame by removing nulls, zero volumes, and duplicate timestamps.",
+      "args": [
+        "df"
+      ],
+      "lineno": 11
+    },
+    "src/data/cleaning.py::compute_dynamic_dollar_bar_threshold": {
+      "id": "src/data/cleaning.py::compute_dynamic_dollar_bar_threshold",
+      "type": "function",
+      "name": "compute_dynamic_dollar_bar_threshold",
+      "path": "src/data/cleaning.py",
+      "docstring": "Computes a dynamic, context-adaptive Dollar Bar threshold based on the rolling mean\nof daily dollar volume divided by the target bar frequency (~24 bars/day).\nPrevents time-varying sample imbalance across multi-year market regimes.",
+      "args": [
+        "df",
+        "rolling_days",
+        "target_daily_bars"
+      ],
+      "lineno": 32
+    },
+    "src/data/cleaning.py::resample_to_information_bars": {
+      "id": "src/data/cleaning.py::resample_to_information_bars",
+      "type": "function",
+      "name": "resample_to_information_bars",
+      "path": "src/data/cleaning.py",
+      "docstring": "Resamples chronological OHLCV data into Information Bars (Dollar Bars or Volume Bars).\nSupports dynamic context-adaptive threshold calculation.\n\nParameters:\n    df: Polars DataFrame containing OHLCV.\n    threshold: Explicit Dollar or Volume threshold. If None and auto_dynamic_threshold=True, computed dynamically.\n    bar_type: 'dollar' (Notional Value = Close * Volume) or 'volume' (Shares/Units Volume).\n    auto_dynamic_threshold: Whether to compute threshold dynamically if threshold is None.",
+      "args": [
+        "df",
+        "threshold",
+        "bar_type",
+        "auto_dynamic_threshold"
+      ],
+      "lineno": 64
+    },
+    "src/data/ingestion.py": {
+      "id": "src/data/ingestion.py",
+      "type": "module",
+      "name": "src.data.ingestion",
+      "path": "src/data/ingestion.py",
+      "docstring": "Data ingestion module for OHLCV and crypto microstructure data (Funding Rate, Open Interest).\nUses CCXT and yfinance with robust fallback handlers.",
+      "lines": 10
+    },
+    "src/data/ingestion.py::fetch_ohlcv_yfinance": {
+      "id": "src/data/ingestion.py::fetch_ohlcv_yfinance",
+      "type": "function",
+      "name": "fetch_ohlcv_yfinance",
+      "path": "src/data/ingestion.py",
+      "docstring": "Fetches historical OHLCV data from Yahoo Finance and converts it to a Polars DataFrame.\nIncludes synthetic fallback generator for offline / rate-limited execution.",
+      "args": [
+        "ticker",
+        "period",
+        "interval",
+        "seed"
+      ],
+      "lineno": 15
+    },
+    "src/data/ingestion.py::fetch_microstructure_data": {
+      "id": "src/data/ingestion.py::fetch_microstructure_data",
+      "type": "function",
+      "name": "fetch_microstructure_data",
+      "path": "src/data/ingestion.py",
+      "docstring": "Fetches microstructural data (Funding Rate & Open Interest).\nIncludes synthetic baseline generator for deterministic offline backtesting.",
+      "args": [
+        "symbol",
+        "timeframe",
+        "limit",
+        "seed"
+      ],
+      "lineno": 79
+    },
+    "src/data/ingestion.py::fetch_multi_year_dataset": {
+      "id": "src/data/ingestion.py::fetch_multi_year_dataset",
+      "type": "function",
+      "name": "fetch_multi_year_dataset",
+      "path": "src/data/ingestion.py",
+      "docstring": "Unified multi-year data ingestion pipeline ensuring multi-regime coverage (bull, bear, range).",
+      "args": [
+        "ticker",
+        "symbol",
+        "years",
+        "interval"
+      ],
+      "lineno": 133
+    },
+    "src/data/__init__.py": {
+      "id": "src/data/__init__.py",
+      "type": "module",
+      "name": "src.data",
+      "path": "src/data/__init__.py",
+      "docstring": "Data package.",
+      "lines": 4
+    },
+    "src/execution/ccxt_executor.py": {
+      "id": "src/execution/ccxt_executor.py",
+      "type": "module",
+      "name": "src.execution.ccxt_executor",
+      "path": "src/execution/ccxt_executor.py",
+      "docstring": "CCXT Private API Direct Exchange Execution Adapter.\nSupports Binance Futures and Bybit Futures with Testnet / Live key handling.\nEnforces Hard Circuit Breakers and Bracket TP/SL Order placement.",
+      "lines": 8
+    },
+    "src/execution/ccxt_executor.py::ExchangeExecutor": {
+      "id": "src/execution/ccxt_executor.py::ExchangeExecutor",
+      "type": "class",
+      "name": "ExchangeExecutor",
+      "path": "src/execution/ccxt_executor.py",
+      "docstring": "Direct Exchange Execution Adapter connecting to Binance/Bybit Futures APIs.",
+      "bases": [],
+      "lineno": 17
+    },
+    "src/execution/ccxt_executor.py::ExchangeExecutor.__init__": {
+      "id": "src/execution/ccxt_executor.py::ExchangeExecutor.__init__",
+      "type": "function",
+      "name": "ExchangeExecutor.__init__",
+      "path": "src/execution/ccxt_executor.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "exchange_id",
+        "api_key",
+        "secret_key",
+        "is_testnet"
+      ],
+      "lineno": 21
+    },
+    "src/execution/ccxt_executor.py::ExchangeExecutor._initialize_exchange": {
+      "id": "src/execution/ccxt_executor.py::ExchangeExecutor._initialize_exchange",
+      "type": "function",
+      "name": "ExchangeExecutor._initialize_exchange",
+      "path": "src/execution/ccxt_executor.py",
+      "docstring": "Initializes CCXT private exchange instance with testnet sandbox support.",
+      "args": [
+        "self"
+      ],
+      "lineno": 36
+    },
+    "src/execution/ccxt_executor.py::ExchangeExecutor.execute_signal_order": {
+      "id": "src/execution/ccxt_executor.py::ExchangeExecutor.execute_signal_order",
+      "type": "function",
+      "name": "ExchangeExecutor.execute_signal_order",
+      "path": "src/execution/ccxt_executor.py",
+      "docstring": "Executes leverage configuration, main position order (Maker Limit Order by default),\nand bracket TP/SL orders on the exchange.",
+      "args": [
+        "self",
+        "symbol",
+        "signal_score",
+        "current_price",
+        "suggested_leverage",
+        "take_profit",
+        "stop_loss",
+        "order_type",
+        "position_size_usd"
+      ],
+      "lineno": 58
+    },
+    "src/execution/paper_trader.py": {
+      "id": "src/execution/paper_trader.py",
+      "type": "module",
+      "name": "src.execution.paper_trader",
+      "path": "src/execution/paper_trader.py",
+      "docstring": "Paper Trading Dry-Run Engine.\nSimulates live signal execution, latency metrics, paper balance tracking, and trade logging.",
+      "lines": 5
+    },
+    "src/execution/paper_trader.py::PaperTraderEngine": {
+      "id": "src/execution/paper_trader.py::PaperTraderEngine",
+      "type": "class",
+      "name": "PaperTraderEngine",
+      "path": "src/execution/paper_trader.py",
+      "docstring": "Dry-run simulation engine for live signal testing on Testnet/Paper accounts.",
+      "bases": [],
+      "lineno": 12
+    },
+    "src/execution/paper_trader.py::PaperTraderEngine.__init__": {
+      "id": "src/execution/paper_trader.py::PaperTraderEngine.__init__",
+      "type": "function",
+      "name": "PaperTraderEngine.__init__",
+      "path": "src/execution/paper_trader.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "initial_balance",
+        "max_leverage_cap",
+        "daily_loss_limit_pct"
+      ],
+      "lineno": 16
+    },
+    "src/execution/paper_trader.py::PaperTraderEngine._check_circuit_breakers": {
+      "id": "src/execution/paper_trader.py::PaperTraderEngine._check_circuit_breakers",
+      "type": "function",
+      "name": "PaperTraderEngine._check_circuit_breakers",
+      "path": "src/execution/paper_trader.py",
+      "docstring": "Enforces Daily Loss Circuit Breaker.",
+      "args": [
+        "self",
+        "timestamp"
+      ],
+      "lineno": 32
+    },
+    "src/execution/paper_trader.py::PaperTraderEngine.process_signal": {
+      "id": "src/execution/paper_trader.py::PaperTraderEngine.process_signal",
+      "type": "function",
+      "name": "PaperTraderEngine.process_signal",
+      "path": "src/execution/paper_trader.py",
+      "docstring": "Processes a live signal update and executes virtual paper trades.\nEvaluates bracket TP/SL touches and applies 0.020% Maker Fee on entries and exits.",
+      "args": [
+        "self",
+        "signal_score",
+        "current_price",
+        "suggested_leverage",
+        "take_profit",
+        "stop_loss",
+        "high",
+        "low",
+        "timestamp"
+      ],
+      "lineno": 50
+    },
+    "src/execution/__init__.py": {
+      "id": "src/execution/__init__.py",
+      "type": "module",
+      "name": "src.execution",
+      "path": "src/execution/__init__.py",
+      "docstring": "Execution Package.\nIncludes Paper Trading Dry-Run Engine.",
+      "lines": 3
+    },
+    "src/features/technical_indicators.py": {
+      "id": "src/features/technical_indicators.py",
+      "type": "module",
+      "name": "src.features.technical_indicators",
+      "path": "src/features/technical_indicators.py",
+      "docstring": "Advanced Feature Engineering Module using Polars.\nIncludes Fractional Differentiation (FracDiff d*), Crypto Microstructure Indicators,\nMulti-Timeframe trends, and strict Zero Look-Ahead Bias via .shift(1).",
+      "lines": 11
+    },
+    "src/features/technical_indicators.py::get_fracdiff_weights": {
+      "id": "src/features/technical_indicators.py::get_fracdiff_weights",
+      "type": "function",
+      "name": "get_fracdiff_weights",
+      "path": "src/features/technical_indicators.py",
+      "docstring": "Generates Fractional Differentiation weights (López de Prado).",
+      "args": [
+        "d",
+        "threshold",
+        "max_lags"
+      ],
+      "lineno": 15
+    },
+    "src/features/technical_indicators.py::fractional_differentiation": {
+      "id": "src/features/technical_indicators.py::fractional_differentiation",
+      "type": "function",
+      "name": "fractional_differentiation",
+      "path": "src/features/technical_indicators.py",
+      "docstring": "Applies Fractional Differentiation to a 1D numpy array.",
+      "args": [
+        "series",
+        "d",
+        "threshold"
+      ],
+      "lineno": 30
+    },
+    "src/features/technical_indicators.py::find_optimal_d": {
+      "id": "src/features/technical_indicators.py::find_optimal_d",
+      "type": "function",
+      "name": "find_optimal_d",
+      "path": "src/features/technical_indicators.py",
+      "docstring": "Finds minimum exponent d* in [0.0, 1.0] that passes ADF stationarity test (p-value < 0.05).\nIf train_ratio is provided, calibrates strictly on the initial training window to avoid look-ahead bias.",
+      "args": [
+        "series",
+        "p_value_threshold",
+        "train_ratio"
+      ],
+      "lineno": 49
+    },
+    "src/features/technical_indicators.py::add_advanced_features": {
+      "id": "src/features/technical_indicators.py::add_advanced_features",
+      "type": "function",
+      "name": "add_advanced_features",
+      "path": "src/features/technical_indicators.py",
+      "docstring": "Computes comprehensive quantitative features using Polars vectorized expressions.\nAll features enforce .shift(1) to guarantee zero look-ahead bias.",
+      "args": [
+        "df",
+        "microstructure_df",
+        "optimal_d",
+        "train_ratio"
+      ],
+      "lineno": 80
+    },
+    "src/features/technical_indicators.py::add_multi_timeframe_features": {
+      "id": "src/features/technical_indicators.py::add_multi_timeframe_features",
+      "type": "function",
+      "name": "add_multi_timeframe_features",
+      "path": "src/features/technical_indicators.py",
+      "docstring": "Integrates Multi-Timeframe (MTF) indicators (1d Macro Trend, 4h Volatility Regime) onto the 1h baseline.\nEnforces strict .shift(1) and Polars join_asof(strategy='backward') to eliminate look-ahead bias.",
+      "args": [
+        "df_1h",
+        "df_4h",
+        "df_1d"
+      ],
+      "lineno": 147
+    },
+    "src/features/__init__.py": {
+      "id": "src/features/__init__.py",
+      "type": "module",
+      "name": "src.features",
+      "path": "src/features/__init__.py",
+      "docstring": "Features package.",
+      "lines": 4
+    },
+    "src/models/ensemble.py": {
+      "id": "src/models/ensemble.py",
+      "type": "module",
+      "name": "src.models.ensemble",
+      "path": "src/models/ensemble.py",
+      "docstring": "Hybrid Multi-Model Ensemble Module.\nBlends predictions from LightGBM, XGBoost, and CatBoost classifiers.\nCalculates dynamic weighted ensemble probabilities:\nP_ensemble = w_lgb * P_lgb + w_xgb * P_xgb + w_cat * P_cat",
+      "lines": 9
+    },
+    "src/models/ensemble.py::HybridEnsembleClassifier": {
+      "id": "src/models/ensemble.py::HybridEnsembleClassifier",
+      "type": "class",
+      "name": "HybridEnsembleClassifier",
+      "path": "src/models/ensemble.py",
+      "docstring": "Ensemble Classifier combining LightGBM, XGBoost, and CatBoost.",
+      "bases": [],
+      "lineno": 23
+    },
+    "src/models/ensemble.py::HybridEnsembleClassifier.__init__": {
+      "id": "src/models/ensemble.py::HybridEnsembleClassifier.__init__",
+      "type": "function",
+      "name": "HybridEnsembleClassifier.__init__",
+      "path": "src/models/ensemble.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "weights"
+      ],
+      "lineno": 27
+    },
+    "src/models/ensemble.py::HybridEnsembleClassifier.fit": {
+      "id": "src/models/ensemble.py::HybridEnsembleClassifier.fit",
+      "type": "function",
+      "name": "HybridEnsembleClassifier.fit",
+      "path": "src/models/ensemble.py",
+      "docstring": "Fits all 3 models on the feature matrix.\nMaps labels {-1, 0, 1} to non-negative range for XGBoost {0, 1, 2}.",
+      "args": [
+        "self",
+        "X",
+        "y",
+        "sample_weights",
+        "sample_weight"
+      ],
+      "lineno": 55
+    },
+    "src/models/ensemble.py::HybridEnsembleClassifier.fit_dynamic_weights": {
+      "id": "src/models/ensemble.py::HybridEnsembleClassifier.fit_dynamic_weights",
+      "type": "function",
+      "name": "HybridEnsembleClassifier.fit_dynamic_weights",
+      "path": "src/models/ensemble.py",
+      "docstring": "Dynamically adjusts model weights proportional to Out-of-Sample (OOS) accuracy performance.\nFormula: w_m = Accuracy_m / sum(Accuracy_k)",
+      "args": [
+        "self",
+        "X_val",
+        "y_val"
+      ],
+      "lineno": 81
+    },
+    "src/models/ensemble.py::HybridEnsembleClassifier.predict_proba": {
+      "id": "src/models/ensemble.py::HybridEnsembleClassifier.predict_proba",
+      "type": "function",
+      "name": "HybridEnsembleClassifier.predict_proba",
+      "path": "src/models/ensemble.py",
+      "docstring": "Returns blended class probabilities P(Buy) and P(Sell).",
+      "args": [
+        "self",
+        "X"
+      ],
+      "lineno": 115
+    },
+    "src/models/ensemble.py::HybridEnsembleClassifier.predict_side": {
+      "id": "src/models/ensemble.py::HybridEnsembleClassifier.predict_side",
+      "type": "function",
+      "name": "HybridEnsembleClassifier.predict_side",
+      "path": "src/models/ensemble.py",
+      "docstring": "Returns predicted side in {-1, +1}.",
+      "args": [
+        "self",
+        "X"
+      ],
+      "lineno": 136
+    },
+    "src/models/ensemble.py::HybridEnsembleClassifier.predict": {
+      "id": "src/models/ensemble.py::HybridEnsembleClassifier.predict",
+      "type": "function",
+      "name": "HybridEnsembleClassifier.predict",
+      "path": "src/models/ensemble.py",
+      "docstring": "Standard sklearn/lgbm compatible predict method returning predicted side {-1, +1}.",
+      "args": [
+        "self",
+        "X"
+      ],
+      "lineno": 147
+    },
+    "src/models/meta_labeling.py": {
+      "id": "src/models/meta_labeling.py",
+      "type": "module",
+      "name": "src.models.meta_labeling",
+      "path": "src/models/meta_labeling.py",
+      "docstring": "Meta-Labeling Module (López de Prado Framework).\nCombines Primary Model side prediction with Secondary Meta-Model confidence filtering.",
+      "lines": 6
+    },
+    "src/models/meta_labeling.py::MetaLabelingPipeline": {
+      "id": "src/models/meta_labeling.py::MetaLabelingPipeline",
+      "type": "class",
+      "name": "MetaLabelingPipeline",
+      "path": "src/models/meta_labeling.py",
+      "docstring": "Two-stage architecture:\n1. Primary Model predicts market side m_t in {-1, +1} (Long/Short).\n2. Meta Model predicts probability P(meta = 1) that primary prediction succeeds.",
+      "bases": [],
+      "lineno": 14
+    },
+    "src/models/meta_labeling.py::MetaLabelingPipeline.__init__": {
+      "id": "src/models/meta_labeling.py::MetaLabelingPipeline.__init__",
+      "type": "function",
+      "name": "MetaLabelingPipeline.__init__",
+      "path": "src/models/meta_labeling.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "primary_model"
+      ],
+      "lineno": 20
+    },
+    "src/models/meta_labeling.py::MetaLabelingPipeline.fit": {
+      "id": "src/models/meta_labeling.py::MetaLabelingPipeline.fit",
+      "type": "function",
+      "name": "MetaLabelingPipeline.fit",
+      "path": "src/models/meta_labeling.py",
+      "docstring": "Fits Primary Model on triple barrier labels {-1, 0, +1} and Meta-Model on binary success labels {0, 1}.",
+      "args": [
+        "self",
+        "X",
+        "y",
+        "sample_weights"
+      ],
+      "lineno": 31
+    },
+    "src/models/meta_labeling.py::MetaLabelingPipeline.predict_confidence": {
+      "id": "src/models/meta_labeling.py::MetaLabelingPipeline.predict_confidence",
+      "type": "function",
+      "name": "MetaLabelingPipeline.predict_confidence",
+      "path": "src/models/meta_labeling.py",
+      "docstring": "Returns:\n    primary_side: Predicted side in {-1, +1}\n    meta_prob: Confidence probability in [0.0, 1.0] that trade succeeds",
+      "args": [
+        "self",
+        "X"
+      ],
+      "lineno": 58
+    },
+    "src/models/optimize.py": {
+      "id": "src/models/optimize.py",
+      "type": "module",
+      "name": "src.models.optimize",
+      "path": "src/models/optimize.py",
+      "docstring": "Bayesian Hyperparameter Optimization Module using Optuna (Per-Asset Tuning).\nOptimizes Sortino Ratio Out-of-Sample while constraining Max Drawdown < 15%.",
+      "lines": 11
+    },
+    "src/models/optimize.py::optimize_asset_parameters": {
+      "id": "src/models/optimize.py::optimize_asset_parameters",
+      "type": "function",
+      "name": "optimize_asset_parameters",
+      "path": "src/models/optimize.py",
+      "docstring": "Executes Optuna study to find optimal asset parameters for (pt_multiplier, sl_multiplier, FracDiff d*).\n\nParameters:\n    df_raw: Raw OHLCV DataFrame for the asset.\n    symbol: Trading pair name.\n    n_trials: Number of Bayesian search iterations.\n    \nReturns:\n    Best parameter dictionary and objective value.",
+      "args": [
+        "df_raw",
+        "symbol",
+        "n_trials"
+      ],
+      "lineno": 19
+    },
+    "src/models/optuna_tuner.py": {
+      "id": "src/models/optuna_tuner.py",
+      "type": "module",
+      "name": "src.models.optuna_tuner",
+      "path": "src/models/optuna_tuner.py",
+      "docstring": "Optuna Hyperparameter Optimization Module.\nPerforms Bayesian optimization targeting Out-of-Sample Sharpe Ratio\nover Purged Walk-Forward Cross-Validation splits.",
+      "lines": 15
+    },
+    "src/models/optuna_tuner.py::objective_sharpe_ratio": {
+      "id": "src/models/optuna_tuner.py::objective_sharpe_ratio",
+      "type": "function",
+      "name": "objective_sharpe_ratio",
+      "path": "src/models/optuna_tuner.py",
+      "docstring": "Optuna objective function maximizing Out-of-Sample Sharpe Ratio over Purged CV splits.",
+      "args": [
+        "trial",
+        "X",
+        "y",
+        "weights",
+        "splits",
+        "model_type"
+      ],
+      "lineno": 32
+    },
+    "src/models/optuna_tuner.py::tune_model_hyperparameters": {
+      "id": "src/models/optuna_tuner.py::tune_model_hyperparameters",
+      "type": "function",
+      "name": "tune_model_hyperparameters",
+      "path": "src/models/optuna_tuner.py",
+      "docstring": "Executes Optuna Bayesian hyperparameter tuning targeting Out-of-Sample Sharpe Ratio.",
+      "args": [
+        "df_features",
+        "model_type",
+        "n_trials"
+      ],
+      "lineno": 125
+    },
+    "src/models/signal_scaler.py": {
+      "id": "src/models/signal_scaler.py",
+      "type": "module",
+      "name": "src.models.signal_scaler",
+      "path": "src/models/signal_scaler.py",
+      "docstring": "Signal Scaler & Bet Sizing Module.\nConverts model predictions and meta-labeling probabilities into a continuous signal bounded in [-1.0, +1.0].\nApplies Modified Kelly Bet Sizing scaling.",
+      "lines": 7
+    },
+    "src/models/signal_scaler.py::scale_probabilities_to_signal": {
+      "id": "src/models/signal_scaler.py::scale_probabilities_to_signal",
+      "type": "function",
+      "name": "scale_probabilities_to_signal",
+      "path": "src/models/signal_scaler.py",
+      "docstring": "Scales class probabilities into a continuous signal in range [-1.0, +1.0].\nFormula: Signal = prob_buy - prob_sell",
+      "args": [
+        "prob_sell",
+        "prob_buy",
+        "min_bound",
+        "max_bound"
+      ],
+      "lineno": 9
+    },
+    "src/models/signal_scaler.py::apply_macro_trend_filter": {
+      "id": "src/models/signal_scaler.py::apply_macro_trend_filter",
+      "type": "function",
+      "name": "apply_macro_trend_filter",
+      "path": "src/models/signal_scaler.py",
+      "docstring": "Enforces the Strict Daily Macro Trend Filter (1d):\n- If 1d Macro Regime is Bearish (-1.0), Long signals (S_t > 0) are blocked (set to 0.0).\n- If 1d Macro Regime is Bullish (+1.0), Short signals (S_t < 0) are blocked (set to 0.0).",
+      "args": [
+        "raw_signals",
+        "macro_regimes_1d"
+      ],
+      "lineno": 24
+    },
+    "src/models/signal_scaler.py::scale_meta_signal": {
+      "id": "src/models/signal_scaler.py::scale_meta_signal",
+      "type": "function",
+      "name": "scale_meta_signal",
+      "path": "src/models/signal_scaler.py",
+      "docstring": "Scales combined side predictions {-1, +1} and Meta-Model confidence P(meta) in [0, 1]\ninto a continuous signal in range [-1.0, +1.0].\nEnforces the Strict Daily Macro Trend Filter (1d) if macro_regime_1d is supplied.",
+      "args": [
+        "primary_side",
+        "meta_confidence",
+        "min_confidence_threshold",
+        "macro_regime_1d"
+      ],
+      "lineno": 46
+    },
+    "src/models/signal_scaler.py::calculate_fractional_kelly_bet_size": {
+      "id": "src/models/signal_scaler.py::calculate_fractional_kelly_bet_size",
+      "type": "function",
+      "name": "calculate_fractional_kelly_bet_size",
+      "path": "src/models/signal_scaler.py",
+      "docstring": "Calculates Fractional Kelly Criterion Bet Size.\nFormula: f* = (p * b - (1 - p)) / b\nScaled by fractional multiplier (e.g. Half-Kelly 0.50) for capital preservation.",
+      "args": [
+        "win_probability",
+        "win_loss_ratio",
+        "fraction"
+      ],
+      "lineno": 72
+    },
+    "src/models/signal_scaler.py::scale_regression_return_to_signal": {
+      "id": "src/models/signal_scaler.py::scale_regression_return_to_signal",
+      "type": "function",
+      "name": "scale_regression_return_to_signal",
+      "path": "src/models/signal_scaler.py",
+      "docstring": "Scales predicted continuous returns into a signal in [-1.0, +1.0] using hyperbolic tangent.\nFormula: Signal = tanh( predicted_returns / (factor * volatility) )",
+      "args": [
+        "predicted_returns",
+        "volatility",
+        "factor"
+      ],
+      "lineno": 94
+    },
+    "src/models/train.py": {
+      "id": "src/models/train.py",
+      "type": "module",
+      "name": "src.models.train",
+      "path": "src/models/train.py",
+      "docstring": "Model Training & Purged Walk-Forward Cross-Validation Module.\nGuarantees anti-leakage with Embargo and Sample Uniqueness weighting.",
+      "lines": 12
+    },
+    "src/models/train.py::load_config": {
+      "id": "src/models/train.py::load_config",
+      "type": "function",
+      "name": "load_config",
+      "path": "src/models/train.py",
+      "docstring": "",
+      "args": [
+        "config_path"
+      ],
+      "lineno": 21
+    },
+    "src/models/train.py::purged_walk_forward_splits": {
+      "id": "src/models/train.py::purged_walk_forward_splits",
+      "type": "function",
+      "name": "purged_walk_forward_splits",
+      "path": "src/models/train.py",
+      "docstring": "Generates Purged Walk-Forward temporal splits with Embargo to eliminate data leakage.",
+      "args": [
+        "n_samples",
+        "n_splits",
+        "embargo_pct"
+      ],
+      "lineno": 28
+    },
+    "src/models/train.py::train_model_pipeline": {
+      "id": "src/models/train.py::train_model_pipeline",
+      "type": "function",
+      "name": "train_model_pipeline",
+      "path": "src/models/train.py",
+      "docstring": "Executes complete ML training pipeline:\n1. Triple Barrier Labeling\n2. Sample Uniqueness Weights computation (normalized strictly per fold)\n3. Purged Walk-Forward CV with Dynamic OOS Ensemble Weighting\n4. Meta-Labeling training",
+      "args": [
+        "df_features",
+        "n_splits"
+      ],
+      "lineno": 56
+    },
+    "src/models/triple_barrier.py": {
+      "id": "src/models/triple_barrier.py",
+      "type": "module",
+      "name": "src.models.triple_barrier",
+      "path": "src/models/triple_barrier.py",
+      "docstring": "Triple Barrier Labeling Module (López de Prado Method).\nComputes dynamic Take Profit, Stop Loss, and Time Expiration barriers for Longs and Shorts.",
+      "lines": 7
+    },
+    "src/models/triple_barrier.py::apply_triple_barrier_labeling": {
+      "id": "src/models/triple_barrier.py::apply_triple_barrier_labeling",
+      "type": "function",
+      "name": "apply_triple_barrier_labeling",
+      "path": "src/models/triple_barrier.py",
+      "docstring": "Applies the Triple Barrier Method to create symmetric labels for Long (+1) and Short (-1).\nSupports Dynamic Context-Adaptive Volatility Scaling (scaling TP/SL by short/long vol ratio).\n\nParameters:\n    df: Polars DataFrame containing 'close' and 'feature_volatility_20' (or ATR proxy).\n    pt_multiplier: Take Profit ATR multiplier scalar.\n    sl_multiplier: Stop Loss ATR multiplier scalar.\n    vertical_barrier_lags: Number of max bars allowed before expiration.\n    dynamic_volatility_scaling: If True, scales multipliers by local volatility regime.\n    \nReturns:\n    DataFrame with attached 'label' column in {-1, 0, +1}.",
+      "args": [
+        "df",
+        "pt_multiplier",
+        "sl_multiplier",
+        "vertical_barrier_lags",
+        "dynamic_volatility_scaling"
+      ],
+      "lineno": 13
+    },
+    "src/models/triple_barrier.py::compute_sample_uniqueness_weights": {
+      "id": "src/models/triple_barrier.py::compute_sample_uniqueness_weights",
+      "type": "function",
+      "name": "compute_sample_uniqueness_weights",
+      "path": "src/models/triple_barrier.py",
+      "docstring": "Computes Sample Uniqueness weights (w_t) according to López de Prado.\nPrevents concurrent overlapping events from over-influencing tree splits.",
+      "args": [
+        "df",
+        "vertical_lags"
+      ],
+      "lineno": 100
+    },
+    "src/models/__init__.py": {
+      "id": "src/models/__init__.py",
+      "type": "module",
+      "name": "src.models",
+      "path": "src/models/__init__.py",
+      "docstring": "Models package.",
+      "lines": 3
+    },
+    "src/monitoring/drift.py": {
+      "id": "src/monitoring/drift.py",
+      "type": "module",
+      "name": "src.monitoring.drift",
+      "path": "src/monitoring/drift.py",
+      "docstring": "Concept Drift Detection Module.\nMonitors feature distribution shifts using Kolmogorov-Smirnov test to adjust leverage automatically.",
+      "lines": 7
+    },
+    "src/monitoring/drift.py::ConceptDriftDetector": {
+      "id": "src/monitoring/drift.py::ConceptDriftDetector",
+      "type": "class",
+      "name": "ConceptDriftDetector",
+      "path": "src/monitoring/drift.py",
+      "docstring": "Evaluates feature drift between baseline training set and live production window.",
+      "bases": [],
+      "lineno": 15
+    },
+    "src/monitoring/drift.py::ConceptDriftDetector.__init__": {
+      "id": "src/monitoring/drift.py::ConceptDriftDetector.__init__",
+      "type": "function",
+      "name": "ConceptDriftDetector.__init__",
+      "path": "src/monitoring/drift.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "p_value_threshold"
+      ],
+      "lineno": 19
+    },
+    "src/monitoring/drift.py::ConceptDriftDetector.fit_baseline": {
+      "id": "src/monitoring/drift.py::ConceptDriftDetector.fit_baseline",
+      "type": "function",
+      "name": "ConceptDriftDetector.fit_baseline",
+      "path": "src/monitoring/drift.py",
+      "docstring": "Stores baseline distributions from training dataset.",
+      "args": [
+        "self",
+        "df_features",
+        "feature_cols"
+      ],
+      "lineno": 23
+    },
+    "src/monitoring/drift.py::ConceptDriftDetector.detect_drift": {
+      "id": "src/monitoring/drift.py::ConceptDriftDetector.detect_drift",
+      "type": "function",
+      "name": "ConceptDriftDetector.detect_drift",
+      "path": "src/monitoring/drift.py",
+      "docstring": "Runs 2-sample Kolmogorov-Smirnov test on current window features.\nReturns drift status and suggested leverage multiplier reduction.",
+      "args": [
+        "self",
+        "df_current"
+      ],
+      "lineno": 33
+    },
+    "src/monitoring/telegram_bot.py": {
+      "id": "src/monitoring/telegram_bot.py",
+      "type": "module",
+      "name": "src.monitoring.telegram_bot",
+      "path": "src/monitoring/telegram_bot.py",
+      "docstring": "Telegram Bot Notification Module.\nDispatches real-time signal alerts, TP/SL levels, leverage recommendations,\nand Circuit Breaker warnings via Telegram Bot API (No-Cost).",
+      "lines": 7
+    },
+    "src/monitoring/telegram_bot.py::TelegramNotifier": {
+      "id": "src/monitoring/telegram_bot.py::TelegramNotifier",
+      "type": "class",
+      "name": "TelegramNotifier",
+      "path": "src/monitoring/telegram_bot.py",
+      "docstring": "Asynchronous Telegram Notifier for real-time trading signals and risk alerts.\nGracefully falls back to log-only mode if credentials are not configured.",
+      "bases": [],
+      "lineno": 16
+    },
+    "src/monitoring/telegram_bot.py::TelegramNotifier.__init__": {
+      "id": "src/monitoring/telegram_bot.py::TelegramNotifier.__init__",
+      "type": "function",
+      "name": "TelegramNotifier.__init__",
+      "path": "src/monitoring/telegram_bot.py",
+      "docstring": "",
+      "args": [
+        "self",
+        "bot_token",
+        "chat_id"
+      ],
+      "lineno": 21
+    },
+    "src/monitoring/telegram_bot.py::TelegramNotifier.is_configured": {
+      "id": "src/monitoring/telegram_bot.py::TelegramNotifier.is_configured",
+      "type": "function",
+      "name": "TelegramNotifier.is_configured",
+      "path": "src/monitoring/telegram_bot.py",
+      "docstring": "",
+      "args": [
+        "self"
+      ],
+      "lineno": 31
+    },
+    "src/monitoring/telegram_bot.py::TelegramNotifier.send_message_async": {
+      "id": "src/monitoring/telegram_bot.py::TelegramNotifier.send_message_async",
+      "type": "function",
+      "name": "TelegramNotifier.send_message_async",
+      "path": "src/monitoring/telegram_bot.py",
+      "docstring": "Sends an asynchronous text message to Telegram.",
+      "args": [
+        "self",
+        "message"
+      ],
+      "lineno": 34
+    },
+    "src/monitoring/telegram_bot.py::TelegramNotifier.send_signal_alert_sync": {
+      "id": "src/monitoring/telegram_bot.py::TelegramNotifier.send_signal_alert_sync",
+      "type": "function",
+      "name": "TelegramNotifier.send_signal_alert_sync",
+      "path": "src/monitoring/telegram_bot.py",
+      "docstring": "Formats and dispatches a structured signal alert synchronously.\nSupports Rolling Z-Score Alert evaluation and MTF macro trend context.",
+      "args": [
+        "self",
+        "symbol",
+        "signal_score",
+        "direction",
+        "recommended_leverage",
+        "take_profit",
+        "stop_loss",
+        "confidence_level",
+        "macro_regime_1d",
+        "is_pyramid"
+      ],
+      "lineno": 61
+    },
+    "src/monitoring/telegram_bot.py::TelegramNotifier.send_circuit_breaker_alert_sync": {
+      "id": "src/monitoring/telegram_bot.py::TelegramNotifier.send_circuit_breaker_alert_sync",
+      "type": "function",
+      "name": "TelegramNotifier.send_circuit_breaker_alert_sync",
+      "path": "src/monitoring/telegram_bot.py",
+      "docstring": "Formats and dispatches an emergency circuit breaker alert.",
+      "args": [
+        "self",
+        "reason"
+      ],
+      "lineno": 99
+    },
+    "src/pipeline/retrain.py": {
+      "id": "src/pipeline/retrain.py",
+      "type": "module",
+      "name": "src.pipeline.retrain",
+      "path": "src/pipeline/retrain.py",
+      "docstring": "Automated MLOps Retraining Pipeline.\nFetches recent multi-year data, evaluates Concept Drift, re-trains model pipeline,\nand exports atomic .joblib model artifacts for Zero-Downtime Hot-Reloading.",
+      "lines": 13
+    },
+    "src/pipeline/retrain.py::run_automated_retraining_pipeline": {
+      "id": "src/pipeline/retrain.py::run_automated_retraining_pipeline",
+      "type": "function",
+      "name": "run_automated_retraining_pipeline",
+      "path": "src/pipeline/retrain.py",
+      "docstring": "Executes automated retraining pipeline with Concept Drift validation and Atomic Hot-Reloading.",
+      "args": [
+        "ticker",
+        "symbol",
+        "model_dir",
+        "force_retrain",
+        "api_url"
+      ],
+      "lineno": 21
+    },
+    "src/pipeline/__init__.py": {
+      "id": "src/pipeline/__init__.py",
+      "type": "module",
+      "name": "src.pipeline",
+      "path": "src/pipeline/__init__.py",
+      "docstring": "Pipeline Package.\nIncludes automated MLOps retraining.",
+      "lines": 3
+    },
+    "src/utils/logger.py": {
+      "id": "src/utils/logger.py",
+      "type": "module",
+      "name": "src.utils.logger",
+      "path": "src/utils/logger.py",
+      "docstring": "Logging utility for trading signals ML.",
+      "lines": 4
+    },
+    "src/utils/logger.py::setup_logger": {
+      "id": "src/utils/logger.py::setup_logger",
+      "type": "function",
+      "name": "setup_logger",
+      "path": "src/utils/logger.py",
+      "docstring": "",
+      "args": [
+        "name",
+        "level"
+      ],
+      "lineno": 8
+    },
+    "src/utils/__init__.py": {
+      "id": "src/utils/__init__.py",
+      "type": "module",
+      "name": "src.utils",
+      "path": "src/utils/__init__.py",
+      "docstring": "Utils package.",
+      "lines": 3
+    },
+    "tests/test_api.py": {
+      "id": "tests/test_api.py",
+      "type": "module",
+      "name": "tests.test_api",
+      "path": "tests/test_api.py",
+      "docstring": "Unit tests for FastAPI REST Endpoints and Prediction Payload.",
+      "lines": 6
+    },
+    "tests/test_api.py::test_health_endpoint": {
+      "id": "tests/test_api.py::test_health_endpoint",
+      "type": "function",
+      "name": "test_health_endpoint",
+      "path": "tests/test_api.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 11
+    },
+    "tests/test_api.py::test_predict_endpoint": {
+      "id": "tests/test_api.py::test_predict_endpoint",
+      "type": "function",
+      "name": "test_predict_endpoint",
+      "path": "tests/test_api.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 17
+    },
+    "tests/test_backtest_leverage.py": {
+      "id": "tests/test_backtest_leverage.py",
+      "type": "module",
+      "name": "tests.test_backtest_leverage",
+      "path": "tests/test_backtest_leverage.py",
+      "docstring": "Unit tests for Leverage Backtesting Engine and Liquidation Price simulation.",
+      "lines": 6
+    },
+    "tests/test_backtest_leverage.py::test_leverage_backtest_execution": {
+      "id": "tests/test_backtest_leverage.py::test_leverage_backtest_execution",
+      "type": "function",
+      "name": "test_leverage_backtest_execution",
+      "path": "tests/test_backtest_leverage.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 10
+    },
+    "tests/test_backtest_leverage.py::test_liquidation_trigger": {
+      "id": "tests/test_backtest_leverage.py::test_liquidation_trigger",
+      "type": "function",
+      "name": "test_liquidation_trigger",
+      "path": "tests/test_backtest_leverage.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 32
+    },
+    "tests/test_ccxt_executor.py": {
+      "id": "tests/test_ccxt_executor.py",
+      "type": "module",
+      "name": "tests.test_ccxt_executor",
+      "path": "tests/test_ccxt_executor.py",
+      "docstring": "Unit tests for CCXT Direct Exchange Execution Adapter.",
+      "lines": 5
+    },
+    "tests/test_ccxt_executor.py::test_ccxt_executor_mock_order": {
+      "id": "tests/test_ccxt_executor.py::test_ccxt_executor_mock_order",
+      "type": "function",
+      "name": "test_ccxt_executor_mock_order",
+      "path": "tests/test_ccxt_executor.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 7
+    },
+    "tests/test_ccxt_executor.py::test_ccxt_executor_neutral_skip": {
+      "id": "tests/test_ccxt_executor.py::test_ccxt_executor_neutral_skip",
+      "type": "function",
+      "name": "test_ccxt_executor_neutral_skip",
+      "path": "tests/test_ccxt_executor.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 25
+    },
+    "tests/test_ccxt_executor.py::test_paper_trader_tp_sl_touch": {
+      "id": "tests/test_ccxt_executor.py::test_paper_trader_tp_sl_touch",
+      "type": "function",
+      "name": "test_paper_trader_tp_sl_touch",
+      "path": "tests/test_ccxt_executor.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 38
+    },
+    "tests/test_data_integrity.py": {
+      "id": "tests/test_data_integrity.py",
+      "type": "module",
+      "name": "tests.test_data_integrity",
+      "path": "tests/test_data_integrity.py",
+      "docstring": "Unit tests for data cleaning and integrity.",
+      "lines": 5
+    },
+    "tests/test_data_integrity.py::test_clean_ohlcv_duplicates_and_zeros": {
+      "id": "tests/test_data_integrity.py::test_clean_ohlcv_duplicates_and_zeros",
+      "type": "function",
+      "name": "test_clean_ohlcv_duplicates_and_zeros",
+      "path": "tests/test_data_integrity.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 11
+    },
+    "tests/test_data_leakage.py": {
+      "id": "tests/test_data_leakage.py",
+      "type": "module",
+      "name": "tests.test_data_leakage",
+      "path": "tests/test_data_leakage.py",
+      "docstring": "Empirical anti-leakage sanitization test suite.\nValidates that features use strict shift(1) without look-ahead bias,\nand that parameter calibration (e.g. FracDiff d*) does not leak OOS data.",
+      "lines": 6
+    },
+    "tests/test_data_leakage.py::test_feature_shift_anti_leakage": {
+      "id": "tests/test_data_leakage.py::test_feature_shift_anti_leakage",
+      "type": "function",
+      "name": "test_feature_shift_anti_leakage",
+      "path": "tests/test_data_leakage.py",
+      "docstring": "Empirically verifies that modifying future prices does not affect historical feature values.",
+      "args": [],
+      "lineno": 12
+    },
+    "tests/test_data_leakage.py::test_find_optimal_d_no_oos_leakage": {
+      "id": "tests/test_data_leakage.py::test_find_optimal_d_no_oos_leakage",
+      "type": "function",
+      "name": "test_find_optimal_d_no_oos_leakage",
+      "path": "tests/test_data_leakage.py",
+      "docstring": "Verifies that find_optimal_d with train_ratio does not depend on out-of-sample data.",
+      "args": [],
+      "lineno": 45
+    },
+    "tests/test_ensemble.py": {
+      "id": "tests/test_ensemble.py",
+      "type": "module",
+      "name": "tests.test_ensemble",
+      "path": "tests/test_ensemble.py",
+      "docstring": "Unit tests for Hybrid Multi-Model Ensemble (LightGBM + XGBoost + CatBoost).",
+      "lines": 4
+    },
+    "tests/test_ensemble.py::test_hybrid_ensemble_fit_predict": {
+      "id": "tests/test_ensemble.py::test_hybrid_ensemble_fit_predict",
+      "type": "function",
+      "name": "test_hybrid_ensemble_fit_predict",
+      "path": "tests/test_ensemble.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 8
+    },
+    "tests/test_features.py": {
+      "id": "tests/test_features.py",
+      "type": "module",
+      "name": "tests.test_features",
+      "path": "tests/test_features.py",
+      "docstring": "Unit tests for Feature Engineering, FracDiff, Information Bars, and Microstructure.",
+      "lines": 9
+    },
+    "tests/test_features.py::test_fracdiff_weights": {
+      "id": "tests/test_features.py::test_fracdiff_weights",
+      "type": "function",
+      "name": "test_fracdiff_weights",
+      "path": "tests/test_features.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 14
+    },
+    "tests/test_features.py::test_information_bars_resampling": {
+      "id": "tests/test_features.py::test_information_bars_resampling",
+      "type": "function",
+      "name": "test_information_bars_resampling",
+      "path": "tests/test_features.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 30
+    },
+    "tests/test_features.py::test_add_advanced_features": {
+      "id": "tests/test_features.py::test_add_advanced_features",
+      "type": "function",
+      "name": "test_add_advanced_features",
+      "path": "tests/test_features.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 37
+    },
+    "tests/test_graphify.py": {
+      "id": "tests/test_graphify.py",
+      "type": "module",
+      "name": "tests.test_graphify",
+      "path": "tests/test_graphify.py",
+      "docstring": "Unit and integration tests for Graphify AST Indexer and Knowledge Graph engine.",
+      "lines": 9
+    },
+    "tests/test_graphify.py::test_knowledge_graph_basic": {
+      "id": "tests/test_graphify.py::test_knowledge_graph_basic",
+      "type": "function",
+      "name": "test_knowledge_graph_basic",
+      "path": "tests/test_graphify.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 10
+    },
+    "tests/test_graphify.py::test_graph_query_search": {
+      "id": "tests/test_graphify.py::test_graph_query_search",
+      "type": "function",
+      "name": "test_graph_query_search",
+      "path": "tests/test_graphify.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 26
+    },
+    "tests/test_graphify.py::test_graph_persistence": {
+      "id": "tests/test_graphify.py::test_graph_persistence",
+      "type": "function",
+      "name": "test_graph_persistence",
+      "path": "tests/test_graphify.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 36
+    },
+    "tests/test_graphify.py::test_ast_extractor_repository": {
+      "id": "tests/test_graphify.py::test_ast_extractor_repository",
+      "type": "function",
+      "name": "test_ast_extractor_repository",
+      "path": "tests/test_graphify.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 50
+    },
+    "tests/test_mlops.py": {
+      "id": "tests/test_mlops.py",
+      "type": "module",
+      "name": "tests.test_mlops",
+      "path": "tests/test_mlops.py",
+      "docstring": "Unit tests for Automated MLOps Retraining Pipeline.",
+      "lines": 3
+    },
+    "tests/test_mlops.py::test_automated_retraining_pipeline": {
+      "id": "tests/test_mlops.py::test_automated_retraining_pipeline",
+      "type": "function",
+      "name": "test_automated_retraining_pipeline",
+      "path": "tests/test_mlops.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 7
+    },
+    "tests/test_models.py": {
+      "id": "tests/test_models.py",
+      "type": "module",
+      "name": "tests.test_models",
+      "path": "tests/test_models.py",
+      "docstring": "Unit tests for Triple Barrier Labeling, Meta-Labeling, and Purged CV.",
+      "lines": 9
+    },
+    "tests/test_models.py::test_triple_barrier_labeling": {
+      "id": "tests/test_models.py::test_triple_barrier_labeling",
+      "type": "function",
+      "name": "test_triple_barrier_labeling",
+      "path": "tests/test_models.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 14
+    },
+    "tests/test_models.py::test_purged_walk_forward_splits": {
+      "id": "tests/test_models.py::test_purged_walk_forward_splits",
+      "type": "function",
+      "name": "test_purged_walk_forward_splits",
+      "path": "tests/test_models.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 26
+    },
+    "tests/test_models.py::test_meta_labeling_pipeline": {
+      "id": "tests/test_models.py::test_meta_labeling_pipeline",
+      "type": "function",
+      "name": "test_meta_labeling_pipeline",
+      "path": "tests/test_models.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 36
+    },
+    "tests/test_multi_timeframe.py": {
+      "id": "tests/test_multi_timeframe.py",
+      "type": "module",
+      "name": "tests.test_multi_timeframe",
+      "path": "tests/test_multi_timeframe.py",
+      "docstring": "Unit tests for Multi-Timeframe Feature Fusion, Dynamic Dollar Bars,\nStrict 1d Macro Trend Filter, Pyramiding, Maker Execution, and Weekend Filter.",
+      "lines": 16
+    },
+    "tests/test_multi_timeframe.py::test_dynamic_dollar_bar_threshold": {
+      "id": "tests/test_multi_timeframe.py::test_dynamic_dollar_bar_threshold",
+      "type": "function",
+      "name": "test_dynamic_dollar_bar_threshold",
+      "path": "tests/test_multi_timeframe.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 17
+    },
+    "tests/test_multi_timeframe.py::test_multi_timeframe_join_asof": {
+      "id": "tests/test_multi_timeframe.py::test_multi_timeframe_join_asof",
+      "type": "function",
+      "name": "test_multi_timeframe_join_asof",
+      "path": "tests/test_multi_timeframe.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 37
+    },
+    "tests/test_multi_timeframe.py::test_strict_daily_macro_trend_filter": {
+      "id": "tests/test_multi_timeframe.py::test_strict_daily_macro_trend_filter",
+      "type": "function",
+      "name": "test_strict_daily_macro_trend_filter",
+      "path": "tests/test_multi_timeframe.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 67
+    },
+    "tests/test_multi_timeframe.py::test_dynamic_triple_barrier_volatility_scaling": {
+      "id": "tests/test_multi_timeframe.py::test_dynamic_triple_barrier_volatility_scaling",
+      "type": "function",
+      "name": "test_dynamic_triple_barrier_volatility_scaling",
+      "path": "tests/test_multi_timeframe.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 82
+    },
+    "tests/test_multi_timeframe.py::test_pyramiding_and_breakeven_sl": {
+      "id": "tests/test_multi_timeframe.py::test_pyramiding_and_breakeven_sl",
+      "type": "function",
+      "name": "test_pyramiding_and_breakeven_sl",
+      "path": "tests/test_multi_timeframe.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 99
+    },
+    "tests/test_multi_timeframe.py::test_maker_limit_order_execution": {
+      "id": "tests/test_multi_timeframe.py::test_maker_limit_order_execution",
+      "type": "function",
+      "name": "test_maker_limit_order_execution",
+      "path": "tests/test_multi_timeframe.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 127
+    },
+    "tests/test_phase8_9.py": {
+      "id": "tests/test_phase8_9.py",
+      "type": "module",
+      "name": "tests.test_phase8_9",
+      "path": "tests/test_phase8_9.py",
+      "docstring": "Unit tests for Phase 8 (Optuna Tuner, Dynamic Hybrid Ensemble, Fractional Kelly Bet Sizing)\nand Phase 9 (Dashboard REST API Endpoints).",
+      "lines": 14
+    },
+    "tests/test_phase8_9.py::test_fractional_kelly_bet_sizing": {
+      "id": "tests/test_phase8_9.py::test_fractional_kelly_bet_sizing",
+      "type": "function",
+      "name": "test_fractional_kelly_bet_sizing",
+      "path": "tests/test_phase8_9.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 19
+    },
+    "tests/test_phase8_9.py::test_hybrid_ensemble_dynamic_weights": {
+      "id": "tests/test_phase8_9.py::test_hybrid_ensemble_dynamic_weights",
+      "type": "function",
+      "name": "test_hybrid_ensemble_dynamic_weights",
+      "path": "tests/test_phase8_9.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 30
+    },
+    "tests/test_phase8_9.py::test_optuna_tuner_sharpe_optimization": {
+      "id": "tests/test_phase8_9.py::test_optuna_tuner_sharpe_optimization",
+      "type": "function",
+      "name": "test_optuna_tuner_sharpe_optimization",
+      "path": "tests/test_phase8_9.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 44
+    },
+    "tests/test_phase8_9.py::test_dashboard_api_endpoints": {
+      "id": "tests/test_phase8_9.py::test_dashboard_api_endpoints",
+      "type": "function",
+      "name": "test_dashboard_api_endpoints",
+      "path": "tests/test_phase8_9.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 66
+    },
+    "tests/test_recommendations.py": {
+      "id": "tests/test_recommendations.py",
+      "type": "module",
+      "name": "tests.test_recommendations",
+      "path": "tests/test_recommendations.py",
+      "docstring": "Unit tests for the 5 Key Recommendations:\n1. Paper Trading Engine & Latency Tracking\n2. Multi-Year Dataset Ingestion\n3. Hard Circuit Breakers & Leverage Cap\n4. Per-Asset Optuna Bayesian Tuning",
+      "lines": 12
+    },
+    "tests/test_recommendations.py::test_paper_trader_execution": {
+      "id": "tests/test_recommendations.py::test_paper_trader_execution",
+      "type": "function",
+      "name": "test_paper_trader_execution",
+      "path": "tests/test_recommendations.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 17
+    },
+    "tests/test_recommendations.py::test_paper_trader_circuit_breaker": {
+      "id": "tests/test_recommendations.py::test_paper_trader_circuit_breaker",
+      "type": "function",
+      "name": "test_paper_trader_circuit_breaker",
+      "path": "tests/test_recommendations.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 34
+    },
+    "tests/test_recommendations.py::test_multi_year_ingestion": {
+      "id": "tests/test_recommendations.py::test_multi_year_ingestion",
+      "type": "function",
+      "name": "test_multi_year_ingestion",
+      "path": "tests/test_recommendations.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 48
+    },
+    "tests/test_recommendations.py::test_optuna_asset_tuning": {
+      "id": "tests/test_recommendations.py::test_optuna_asset_tuning",
+      "type": "function",
+      "name": "test_optuna_asset_tuning",
+      "path": "tests/test_recommendations.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 55
+    },
+    "tests/test_recommendations.py::test_hard_leverage_cap": {
+      "id": "tests/test_recommendations.py::test_hard_leverage_cap",
+      "type": "function",
+      "name": "test_hard_leverage_cap",
+      "path": "tests/test_recommendations.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 70
+    },
+    "tests/test_signal_scaler.py": {
+      "id": "tests/test_signal_scaler.py",
+      "type": "module",
+      "name": "tests.test_signal_scaler",
+      "path": "tests/test_signal_scaler.py",
+      "docstring": "Unit tests for the Signal Scaler module [-1.0, +1.0].",
+      "lines": 6
+    },
+    "tests/test_signal_scaler.py::test_scale_probabilities_bounds": {
+      "id": "tests/test_signal_scaler.py::test_scale_probabilities_bounds",
+      "type": "function",
+      "name": "test_scale_probabilities_bounds",
+      "path": "tests/test_signal_scaler.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 13
+    },
+    "tests/test_signal_scaler.py::test_scale_regression_return_bounds": {
+      "id": "tests/test_signal_scaler.py::test_scale_regression_return_bounds",
+      "type": "function",
+      "name": "test_scale_regression_return_bounds",
+      "path": "tests/test_signal_scaler.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 26
+    },
+    "tests/test_telegram.py": {
+      "id": "tests/test_telegram.py",
+      "type": "module",
+      "name": "tests.test_telegram",
+      "path": "tests/test_telegram.py",
+      "docstring": "Unit tests for Telegram Bot Notification Module.\nVerifies message formatting, mock fallback, and signal/circuit breaker alerts.",
+      "lines": 4
+    },
+    "tests/test_telegram.py::test_telegram_notifier_unconfigured_fallback": {
+      "id": "tests/test_telegram.py::test_telegram_notifier_unconfigured_fallback",
+      "type": "function",
+      "name": "test_telegram_notifier_unconfigured_fallback",
+      "path": "tests/test_telegram.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 8
+    },
+    "tests/test_telegram.py::test_telegram_notifier_circuit_breaker_alert": {
+      "id": "tests/test_telegram.py::test_telegram_notifier_circuit_breaker_alert",
+      "type": "function",
+      "name": "test_telegram_notifier_circuit_breaker_alert",
+      "path": "tests/test_telegram.py",
+      "docstring": "",
+      "args": [],
+      "lineno": 26
+    },
+    "tests/__init__.py": {
+      "id": "tests/__init__.py",
+      "type": "module",
+      "name": "tests",
+      "path": "tests/__init__.py",
+      "docstring": "Tests package.",
+      "lines": 1
+    }
+  },
+  "edges": [
+    {
+      "source": "graphify/extractor.py",
+      "target": "graphify/graph.py",
+      "relation": "imports"
+    },
+    {
+      "source": "graphify/extractor.py",
+      "target": "graphify/extractor.py::ASTExtractor",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py::ASTExtractor",
+      "target": "graphify/extractor.py::ASTExtractor.__init__",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py::ASTExtractor",
+      "target": "graphify/extractor.py::ASTExtractor.visit_Module",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py::ASTExtractor",
+      "target": "graphify/extractor.py::ASTExtractor.visit_ClassDef",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py::ASTExtractor",
+      "target": "graphify/extractor.py::ASTExtractor.visit_FunctionDef",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py::ASTExtractor",
+      "target": "graphify/extractor.py::ASTExtractor.visit_AsyncFunctionDef",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py::ASTExtractor",
+      "target": "graphify/extractor.py::ASTExtractor._process_function",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py::ASTExtractor",
+      "target": "graphify/extractor.py::ASTExtractor.visit_Import",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py::ASTExtractor",
+      "target": "graphify/extractor.py::ASTExtractor.visit_ImportFrom",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py",
+      "target": "graphify/extractor.py::_module_to_rel_path",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/extractor.py",
+      "target": "graphify/extractor.py::extract_repository_graph",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py",
+      "target": "graphify/graph.py::KnowledgeGraph",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph.__init__",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph.add_node",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph.add_edge",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph.save",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph.load",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph.query",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph.get_dependencies",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph.get_dependents",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph._resolve_module_id",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/graph.py::KnowledgeGraph",
+      "target": "graphify/graph.py::KnowledgeGraph.get_stats",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/extractor.py",
+      "relation": "imports"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/graph.py",
+      "relation": "imports"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/server.py::_tool_extract",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/server.py::_tool_query",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/server.py::_tool_dependencies",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/server.py::_tool_dependents",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/server.py::graphify_extract",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/server.py::graphify_query",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/server.py::graphify_dependencies",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/server.py::graphify_dependents",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/server.py",
+      "target": "graphify/server.py::run_server",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/__main__.py",
+      "target": "graphify/extractor.py",
+      "relation": "imports"
+    },
+    {
+      "source": "graphify/__main__.py",
+      "target": "graphify/graph.py",
+      "relation": "imports"
+    },
+    {
+      "source": "graphify/__main__.py",
+      "target": "graphify/__main__.py::main",
+      "relation": "defines"
+    },
+    {
+      "source": "graphify/__main__.py",
+      "target": "graphify/server.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_paper_trading.py",
+      "target": "src/data/cleaning.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_paper_trading.py",
+      "target": "src/data/ingestion.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_paper_trading.py",
+      "target": "src/execution/paper_trader.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_paper_trading.py",
+      "target": "src/features/technical_indicators.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_paper_trading.py",
+      "target": "src/models/signal_scaler.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_paper_trading.py",
+      "target": "src/monitoring/telegram_bot.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_paper_trading.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_paper_trading.py",
+      "target": "scripts/run_paper_trading.py::handle_shutdown",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/run_paper_trading.py",
+      "target": "scripts/run_paper_trading.py::run_loop",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/run_preprod_stress_test.py",
+      "target": "src/execution/paper_trader.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_preprod_stress_test.py",
+      "target": "src/backtest/metrics.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/run_preprod_stress_test.py",
+      "target": "scripts/run_preprod_stress_test.py::generate_stress_scenario",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/run_preprod_stress_test.py",
+      "target": "scripts/run_preprod_stress_test.py::run_gatekeeper_stress_test",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/update_knowledge_graph.py",
+      "target": "graphify/extractor.py",
+      "relation": "imports"
+    },
+    {
+      "source": "scripts/update_knowledge_graph.py",
+      "target": "scripts/update_knowledge_graph.py::update_graph",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/validate_env.py",
+      "target": "scripts/validate_env.py::_mask_secret",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/validate_env.py",
+      "target": "scripts/validate_env.py::parse_env_file",
+      "relation": "defines"
+    },
+    {
+      "source": "scripts/validate_env.py",
+      "target": "scripts/validate_env.py::validate_environment",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/features/technical_indicators.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/models/signal_scaler.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/monitoring/telegram_bot.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::CandleInput",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::PredictionPayload",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::SignalResponse",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::ReloadModelPayload",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::health_check",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::get_performance_metrics",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::get_dashboard_stats",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::get_drift_status",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::reload_model_in_memory",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::predict_signal",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::ConnectionManager",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py::ConnectionManager",
+      "target": "src/api/server.py::ConnectionManager.__init__",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py::ConnectionManager",
+      "target": "src/api/server.py::ConnectionManager.connect",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py::ConnectionManager",
+      "target": "src/api/server.py::ConnectionManager.disconnect",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py::ConnectionManager",
+      "target": "src/api/server.py::ConnectionManager.broadcast",
+      "relation": "defines"
+    },
+    {
+      "source": "src/api/server.py",
+      "target": "src/api/server.py::websocket_signals_endpoint",
+      "relation": "defines"
+    },
+    {
+      "source": "src/backtest/engine.py",
+      "target": "src/backtest/metrics.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/backtest/engine.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/backtest/engine.py",
+      "target": "src/backtest/engine.py::run_leverage_backtest",
+      "relation": "defines"
+    },
+    {
+      "source": "src/backtest/metrics.py",
+      "target": "src/backtest/metrics.py::calculate_sharpe_ratio",
+      "relation": "defines"
+    },
+    {
+      "source": "src/backtest/metrics.py",
+      "target": "src/backtest/metrics.py::calculate_sortino_ratio",
+      "relation": "defines"
+    },
+    {
+      "source": "src/backtest/metrics.py",
+      "target": "src/backtest/metrics.py::calculate_max_drawdown",
+      "relation": "defines"
+    },
+    {
+      "source": "src/backtest/metrics.py",
+      "target": "src/backtest/metrics.py::calculate_profit_factor",
+      "relation": "defines"
+    },
+    {
+      "source": "src/backtest/metrics.py",
+      "target": "src/backtest/metrics.py::calculate_calmar_ratio",
+      "relation": "defines"
+    },
+    {
+      "source": "src/backtest/__init__.py",
+      "target": "src/backtest/engine.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/backtest/__init__.py",
+      "target": "src/backtest/metrics.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/data/cleaning.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/data/cleaning.py",
+      "target": "src/data/cleaning.py::clean_ohlcv_data",
+      "relation": "defines"
+    },
+    {
+      "source": "src/data/cleaning.py",
+      "target": "src/data/cleaning.py::compute_dynamic_dollar_bar_threshold",
+      "relation": "defines"
+    },
+    {
+      "source": "src/data/cleaning.py",
+      "target": "src/data/cleaning.py::resample_to_information_bars",
+      "relation": "defines"
+    },
+    {
+      "source": "src/data/ingestion.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/data/ingestion.py",
+      "target": "src/data/ingestion.py::fetch_ohlcv_yfinance",
+      "relation": "defines"
+    },
+    {
+      "source": "src/data/ingestion.py",
+      "target": "src/data/ingestion.py::fetch_microstructure_data",
+      "relation": "defines"
+    },
+    {
+      "source": "src/data/ingestion.py",
+      "target": "src/data/ingestion.py::fetch_multi_year_dataset",
+      "relation": "defines"
+    },
+    {
+      "source": "src/data/__init__.py",
+      "target": "src/data/cleaning.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/data/__init__.py",
+      "target": "src/data/ingestion.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/execution/ccxt_executor.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/execution/ccxt_executor.py",
+      "target": "src/execution/ccxt_executor.py::ExchangeExecutor",
+      "relation": "defines"
+    },
+    {
+      "source": "src/execution/ccxt_executor.py::ExchangeExecutor",
+      "target": "src/execution/ccxt_executor.py::ExchangeExecutor.__init__",
+      "relation": "defines"
+    },
+    {
+      "source": "src/execution/ccxt_executor.py::ExchangeExecutor",
+      "target": "src/execution/ccxt_executor.py::ExchangeExecutor._initialize_exchange",
+      "relation": "defines"
+    },
+    {
+      "source": "src/execution/ccxt_executor.py::ExchangeExecutor",
+      "target": "src/execution/ccxt_executor.py::ExchangeExecutor.execute_signal_order",
+      "relation": "defines"
+    },
+    {
+      "source": "src/execution/ccxt_executor.py",
+      "target": "src/models/signal_scaler.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/execution/paper_trader.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/execution/paper_trader.py",
+      "target": "src/execution/paper_trader.py::PaperTraderEngine",
+      "relation": "defines"
+    },
+    {
+      "source": "src/execution/paper_trader.py::PaperTraderEngine",
+      "target": "src/execution/paper_trader.py::PaperTraderEngine.__init__",
+      "relation": "defines"
+    },
+    {
+      "source": "src/execution/paper_trader.py::PaperTraderEngine",
+      "target": "src/execution/paper_trader.py::PaperTraderEngine._check_circuit_breakers",
+      "relation": "defines"
+    },
+    {
+      "source": "src/execution/paper_trader.py::PaperTraderEngine",
+      "target": "src/execution/paper_trader.py::PaperTraderEngine.process_signal",
+      "relation": "defines"
+    },
+    {
+      "source": "src/execution/__init__.py",
+      "target": "src/execution/paper_trader.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/features/technical_indicators.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/features/technical_indicators.py",
+      "target": "src/features/technical_indicators.py::get_fracdiff_weights",
+      "relation": "defines"
+    },
+    {
+      "source": "src/features/technical_indicators.py",
+      "target": "src/features/technical_indicators.py::fractional_differentiation",
+      "relation": "defines"
+    },
+    {
+      "source": "src/features/technical_indicators.py",
+      "target": "src/features/technical_indicators.py::find_optimal_d",
+      "relation": "defines"
+    },
+    {
+      "source": "src/features/technical_indicators.py",
+      "target": "src/features/technical_indicators.py::add_advanced_features",
+      "relation": "defines"
+    },
+    {
+      "source": "src/features/technical_indicators.py",
+      "target": "src/features/technical_indicators.py::add_multi_timeframe_features",
+      "relation": "defines"
+    },
+    {
+      "source": "src/features/__init__.py",
+      "target": "src/features/technical_indicators.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/ensemble.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/ensemble.py",
+      "target": "src/models/ensemble.py::HybridEnsembleClassifier",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/ensemble.py::HybridEnsembleClassifier",
+      "target": "src/models/ensemble.py::HybridEnsembleClassifier.__init__",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/ensemble.py::HybridEnsembleClassifier",
+      "target": "src/models/ensemble.py::HybridEnsembleClassifier.fit",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/ensemble.py::HybridEnsembleClassifier",
+      "target": "src/models/ensemble.py::HybridEnsembleClassifier.fit_dynamic_weights",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/ensemble.py::HybridEnsembleClassifier",
+      "target": "src/models/ensemble.py::HybridEnsembleClassifier.predict_proba",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/ensemble.py::HybridEnsembleClassifier",
+      "target": "src/models/ensemble.py::HybridEnsembleClassifier.predict_side",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/ensemble.py::HybridEnsembleClassifier",
+      "target": "src/models/ensemble.py::HybridEnsembleClassifier.predict",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/meta_labeling.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/meta_labeling.py",
+      "target": "src/models/meta_labeling.py::MetaLabelingPipeline",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/meta_labeling.py::MetaLabelingPipeline",
+      "target": "src/models/meta_labeling.py::MetaLabelingPipeline.__init__",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/meta_labeling.py",
+      "target": "src/models/ensemble.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/meta_labeling.py::MetaLabelingPipeline",
+      "target": "src/models/meta_labeling.py::MetaLabelingPipeline.fit",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/meta_labeling.py::MetaLabelingPipeline",
+      "target": "src/models/meta_labeling.py::MetaLabelingPipeline.predict_confidence",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/optimize.py",
+      "target": "src/backtest/engine.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/optimize.py",
+      "target": "src/features/technical_indicators.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/optimize.py",
+      "target": "src/models/train.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/optimize.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/optimize.py",
+      "target": "src/models/optimize.py::optimize_asset_parameters",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/optuna_tuner.py",
+      "target": "src/models/triple_barrier.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/optuna_tuner.py",
+      "target": "src/models/train.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/optuna_tuner.py",
+      "target": "src/backtest/metrics.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/optuna_tuner.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/optuna_tuner.py",
+      "target": "src/models/optuna_tuner.py::objective_sharpe_ratio",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/optuna_tuner.py",
+      "target": "src/models/optuna_tuner.py::tune_model_hyperparameters",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/signal_scaler.py",
+      "target": "src/models/signal_scaler.py::scale_probabilities_to_signal",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/signal_scaler.py",
+      "target": "src/models/signal_scaler.py::apply_macro_trend_filter",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/signal_scaler.py",
+      "target": "src/models/signal_scaler.py::scale_meta_signal",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/signal_scaler.py",
+      "target": "src/models/signal_scaler.py::calculate_fractional_kelly_bet_size",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/signal_scaler.py",
+      "target": "src/models/signal_scaler.py::scale_regression_return_to_signal",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/train.py",
+      "target": "src/models/meta_labeling.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/train.py",
+      "target": "src/models/triple_barrier.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/train.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/train.py",
+      "target": "src/models/train.py::load_config",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/train.py",
+      "target": "src/models/train.py::purged_walk_forward_splits",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/train.py",
+      "target": "src/models/train.py::train_model_pipeline",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/triple_barrier.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/models/triple_barrier.py",
+      "target": "src/models/triple_barrier.py::apply_triple_barrier_labeling",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/triple_barrier.py",
+      "target": "src/models/triple_barrier.py::compute_sample_uniqueness_weights",
+      "relation": "defines"
+    },
+    {
+      "source": "src/models/__init__.py",
+      "target": "src/models/signal_scaler.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/monitoring/drift.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/monitoring/drift.py",
+      "target": "src/monitoring/drift.py::ConceptDriftDetector",
+      "relation": "defines"
+    },
+    {
+      "source": "src/monitoring/drift.py::ConceptDriftDetector",
+      "target": "src/monitoring/drift.py::ConceptDriftDetector.__init__",
+      "relation": "defines"
+    },
+    {
+      "source": "src/monitoring/drift.py::ConceptDriftDetector",
+      "target": "src/monitoring/drift.py::ConceptDriftDetector.fit_baseline",
+      "relation": "defines"
+    },
+    {
+      "source": "src/monitoring/drift.py::ConceptDriftDetector",
+      "target": "src/monitoring/drift.py::ConceptDriftDetector.detect_drift",
+      "relation": "defines"
+    },
+    {
+      "source": "src/monitoring/telegram_bot.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/monitoring/telegram_bot.py",
+      "target": "src/monitoring/telegram_bot.py::TelegramNotifier",
+      "relation": "defines"
+    },
+    {
+      "source": "src/monitoring/telegram_bot.py::TelegramNotifier",
+      "target": "src/monitoring/telegram_bot.py::TelegramNotifier.__init__",
+      "relation": "defines"
+    },
+    {
+      "source": "src/monitoring/telegram_bot.py::TelegramNotifier",
+      "target": "src/monitoring/telegram_bot.py::TelegramNotifier.is_configured",
+      "relation": "defines"
+    },
+    {
+      "source": "src/monitoring/telegram_bot.py::TelegramNotifier",
+      "target": "src/monitoring/telegram_bot.py::TelegramNotifier.send_message_async",
+      "relation": "defines"
+    },
+    {
+      "source": "src/monitoring/telegram_bot.py::TelegramNotifier",
+      "target": "src/monitoring/telegram_bot.py::TelegramNotifier.send_signal_alert_sync",
+      "relation": "defines"
+    },
+    {
+      "source": "src/monitoring/telegram_bot.py::TelegramNotifier",
+      "target": "src/monitoring/telegram_bot.py::TelegramNotifier.send_circuit_breaker_alert_sync",
+      "relation": "defines"
+    },
+    {
+      "source": "src/pipeline/retrain.py",
+      "target": "src/data/ingestion.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/pipeline/retrain.py",
+      "target": "src/features/technical_indicators.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/pipeline/retrain.py",
+      "target": "src/models/train.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/pipeline/retrain.py",
+      "target": "src/monitoring/drift.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/pipeline/retrain.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/pipeline/retrain.py",
+      "target": "src/pipeline/retrain.py::run_automated_retraining_pipeline",
+      "relation": "defines"
+    },
+    {
+      "source": "src/pipeline/retrain.py",
+      "target": "src/models/optuna_tuner.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/pipeline/__init__.py",
+      "target": "src/pipeline/retrain.py",
+      "relation": "imports"
+    },
+    {
+      "source": "src/utils/logger.py",
+      "target": "src/utils/logger.py::setup_logger",
+      "relation": "defines"
+    },
+    {
+      "source": "src/utils/__init__.py",
+      "target": "src/utils/logger.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_api.py",
+      "target": "src/api/server.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_api.py",
+      "target": "tests/test_api.py::test_health_endpoint",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_api.py",
+      "target": "tests/test_api.py::test_predict_endpoint",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_backtest_leverage.py",
+      "target": "src/backtest/engine.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_backtest_leverage.py",
+      "target": "tests/test_backtest_leverage.py::test_leverage_backtest_execution",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_backtest_leverage.py",
+      "target": "tests/test_backtest_leverage.py::test_liquidation_trigger",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_ccxt_executor.py",
+      "target": "src/execution/ccxt_executor.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_ccxt_executor.py",
+      "target": "tests/test_ccxt_executor.py::test_ccxt_executor_mock_order",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_ccxt_executor.py",
+      "target": "tests/test_ccxt_executor.py::test_ccxt_executor_neutral_skip",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_ccxt_executor.py",
+      "target": "tests/test_ccxt_executor.py::test_paper_trader_tp_sl_touch",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_ccxt_executor.py",
+      "target": "src/execution/paper_trader.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_data_integrity.py",
+      "target": "src/data/cleaning.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_data_integrity.py",
+      "target": "tests/test_data_integrity.py::test_clean_ohlcv_duplicates_and_zeros",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_data_leakage.py",
+      "target": "src/features/technical_indicators.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_data_leakage.py",
+      "target": "tests/test_data_leakage.py::test_feature_shift_anti_leakage",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_data_leakage.py",
+      "target": "tests/test_data_leakage.py::test_find_optimal_d_no_oos_leakage",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_ensemble.py",
+      "target": "src/models/ensemble.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_ensemble.py",
+      "target": "tests/test_ensemble.py::test_hybrid_ensemble_fit_predict",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_features.py",
+      "target": "src/data/cleaning.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_features.py",
+      "target": "src/features/technical_indicators.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_features.py",
+      "target": "tests/test_features.py::test_fracdiff_weights",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_features.py",
+      "target": "tests/test_features.py::test_information_bars_resampling",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_features.py",
+      "target": "tests/test_features.py::test_add_advanced_features",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_graphify.py",
+      "target": "graphify/graph.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_graphify.py",
+      "target": "graphify/extractor.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_graphify.py",
+      "target": "tests/test_graphify.py::test_knowledge_graph_basic",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_graphify.py",
+      "target": "tests/test_graphify.py::test_graph_query_search",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_graphify.py",
+      "target": "tests/test_graphify.py::test_graph_persistence",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_graphify.py",
+      "target": "tests/test_graphify.py::test_ast_extractor_repository",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_mlops.py",
+      "target": "src/pipeline/retrain.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_mlops.py",
+      "target": "tests/test_mlops.py::test_automated_retraining_pipeline",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_models.py",
+      "target": "src/models/meta_labeling.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_models.py",
+      "target": "src/models/train.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_models.py",
+      "target": "src/models/triple_barrier.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_models.py",
+      "target": "tests/test_models.py::test_triple_barrier_labeling",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_models.py",
+      "target": "tests/test_models.py::test_purged_walk_forward_splits",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_models.py",
+      "target": "tests/test_models.py::test_meta_labeling_pipeline",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "src/data/cleaning.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "src/execution/ccxt_executor.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "src/execution/paper_trader.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "src/features/technical_indicators.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "src/models/signal_scaler.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "src/models/triple_barrier.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "tests/test_multi_timeframe.py::test_dynamic_dollar_bar_threshold",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "tests/test_multi_timeframe.py::test_multi_timeframe_join_asof",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "tests/test_multi_timeframe.py::test_strict_daily_macro_trend_filter",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "tests/test_multi_timeframe.py::test_dynamic_triple_barrier_volatility_scaling",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "tests/test_multi_timeframe.py::test_pyramiding_and_breakeven_sl",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_multi_timeframe.py",
+      "target": "tests/test_multi_timeframe.py::test_maker_limit_order_execution",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_phase8_9.py",
+      "target": "src/api/server.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_phase8_9.py",
+      "target": "src/models/ensemble.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_phase8_9.py",
+      "target": "src/models/optuna_tuner.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_phase8_9.py",
+      "target": "src/models/signal_scaler.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_phase8_9.py",
+      "target": "tests/test_phase8_9.py::test_fractional_kelly_bet_sizing",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_phase8_9.py",
+      "target": "tests/test_phase8_9.py::test_hybrid_ensemble_dynamic_weights",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_phase8_9.py",
+      "target": "tests/test_phase8_9.py::test_optuna_tuner_sharpe_optimization",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_phase8_9.py",
+      "target": "tests/test_phase8_9.py::test_dashboard_api_endpoints",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_recommendations.py",
+      "target": "src/api/server.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_recommendations.py",
+      "target": "src/data/ingestion.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_recommendations.py",
+      "target": "src/execution/paper_trader.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_recommendations.py",
+      "target": "src/models/optimize.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_recommendations.py",
+      "target": "tests/test_recommendations.py::test_paper_trader_execution",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_recommendations.py",
+      "target": "tests/test_recommendations.py::test_paper_trader_circuit_breaker",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_recommendations.py",
+      "target": "tests/test_recommendations.py::test_multi_year_ingestion",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_recommendations.py",
+      "target": "tests/test_recommendations.py::test_optuna_asset_tuning",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_recommendations.py",
+      "target": "tests/test_recommendations.py::test_hard_leverage_cap",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_signal_scaler.py",
+      "target": "src/models/signal_scaler.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_signal_scaler.py",
+      "target": "tests/test_signal_scaler.py::test_scale_probabilities_bounds",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_signal_scaler.py",
+      "target": "tests/test_signal_scaler.py::test_scale_regression_return_bounds",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_telegram.py",
+      "target": "src/monitoring/telegram_bot.py",
+      "relation": "imports"
+    },
+    {
+      "source": "tests/test_telegram.py",
+      "target": "tests/test_telegram.py::test_telegram_notifier_unconfigured_fallback",
+      "relation": "defines"
+    },
+    {
+      "source": "tests/test_telegram.py",
+      "target": "tests/test_telegram.py::test_telegram_notifier_circuit_breaker_alert",
+      "relation": "defines"
+    }
+  ]
+}

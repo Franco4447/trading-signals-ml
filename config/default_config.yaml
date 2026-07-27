@@ -1,35 +1,48 @@
-asset:
-  symbol: "BTC/USDT"
-  exchange: "binance"
-  timeframe: "4h"
-  history_days: 365
+# Trading Signals ML - Global Configuration & Risk Parameters
 
-features:
-  rolling_windows: [7, 14, 21, 50]
-  use_zscore: true
-  rsi_period: 14
-  macd_fast: 12
-  macd_slow: 26
-  macd_signal: 9
+risk_management:
+  hard_max_leverage: 10.0          # Hard cap on leverage (never exceeded regardless of signal score)
+  daily_loss_limit_pct: 0.05       # Circuit breaker: pause trading if daily loss exceeds 5%
+  max_drawdown_limit_pct: 0.15     # Maximum acceptable backtest drawdown threshold
+  taker_fee_pct: 0.00075           # Exchange taker fee (0.075%)
+  maker_fee_pct: 0.00020           # Exchange maker fee (0.020%)
+  slippage_pct: 0.00020            # Estimated execution slippage
 
-triple_barrier:
-  take_profit_atr_mult: 1.5
-  stop_loss_atr_mult: 1.0
-  vertical_barrier_bars: 12
+data:
+  default_symbol: "BTC/USDT"
+  timeframe: "1h"
+  history_years: 3                 # Multi-year ingestion scope
+  information_bars_type: "dollar"
+  dollar_bar_threshold: 10000000.0  # $10M USD per bar
 
-model:
-  type: "lightgbm"
-  n_estimators: 200
-  learning_rate: 0.03
-  max_depth: 6
-  random_state: 42
+assets:
+  BTC/USDT:
+    pt_multiplier: 1.5
+    sl_multiplier: 1.0
+    vertical_barrier_lags: 12
+    optimal_d: 0.35
+  ETH/USDT:
+    pt_multiplier: 1.8
+    sl_multiplier: 1.2
+    vertical_barrier_lags: 12
+    optimal_d: 0.40
+  SOL/USDT:
+    pt_multiplier: 2.0
+    sl_multiplier: 1.5
+    vertical_barrier_lags: 12
+    optimal_d: 0.45
 
-signal_scaler:
-  method: "probability_difference" # P(+1) - P(-1)
-  min_bound: -1.0
-  max_bound: 1.0
+api:
+  host: "0.0.0.0"
+  port: 8000
+  websocket_update_interval_sec: 2.0
 
-backtest:
-  taker_fee: 0.00075 # 0.075% fee
-  slippage: 0.0002   # 0.02% slippage
-  initial_capital: 10000.0
+mlops:
+  retraining_schedule: "weekly"     # Scheduled weekly retraining (0 0 * * 0 / Every Sunday at 00:00 UTC)
+  concept_drift_enabled: true      # Automated KS test drift monitoring
+
+training:
+  n_splits: 5
+  embargo_pct: 0.05
+
+

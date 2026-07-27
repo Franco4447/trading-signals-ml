@@ -16,6 +16,13 @@ repos:
 
   - repo: local
     hooks:
+      - id: graphify-extract
+        name: Update Graphify Knowledge Graph
+        entry: python -m graphify extract .
+        language: system
+        pass_filenames: false
+        always_run: true
+
       - id: pytest-check
         name: Run pytest
         entry: pytest tests/
